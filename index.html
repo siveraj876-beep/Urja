@@ -1,0 +1,2055 @@
+<!DOCTYPE html>
+<html lang="hi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ऊर्जा - सनातन ज्ञान, सुविचार एवं वैदिक पंचांग | संस्थापक: ऋषभ कुमार शर्मा</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome Icons 6.5.1 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts for Divine Hindi Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Rozha+One&family=Yatra+One&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        hindi: ['Hind', 'sans-serif'],
+                        title: ['Rozha One', 'serif'],
+                        banner: ['Yatra One', 'cursive']
+                    },
+                    colors: {
+                        saffron: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Hind', sans-serif;
+            background-color: #fcf8f2;
+            color: #292524;
+            margin: 0;
+            padding: 0;
+        }
+
+        @keyframes sunGlow {
+            0%, 100% { transform: scale(1); opacity: 0.85; }
+            50% { transform: scale(1.08); opacity: 1; }
+        }
+        .sun-aura {
+            animation: sunGlow 7s ease-in-out infinite;
+        }
+
+        @keyframes omPulse {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(254, 240, 138, 0.75)); }
+            50% { filter: drop-shadow(0 0 25px rgba(253, 224, 71, 0.95)); }
+        }
+        .om-glow {
+            animation: omPulse 3.5s ease-in-out infinite;
+        }
+
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fff7ed;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ea580c;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-orange-200 selection:text-orange-950 relative">
+
+    <!-- Top Sticky Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-orange-100 shadow-xs">
+        <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-3 cursor-pointer select-none" onclick="filterCategory('all'); clearArchiveFilter(); window.scrollTo({top:0, behavior:'smooth'});">
+                <span class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-600 text-white flex items-center justify-center font-title text-2xl shadow-md">
+                    ॐ
+                </span>
+                <div>
+                    <h1 class="text-2xl font-bold font-title text-orange-700 tracking-wide leading-none">ऊर्जा</h1>
+                    <span class="text-[10px] font-semibold text-stone-500 uppercase tracking-widest block mt-0.5">सकारात्मक विचारों का संगम</span>
+                </div>
+            </div>
+
+            <!-- Header Action Controls -->
+            <div class="flex items-center gap-2">
+                <!-- Panchang Quick Button -->
+                <button type="button" onclick="openCalendarModal()" class="px-3.5 py-1.5 rounded-full bg-orange-100 hover:bg-orange-200 text-orange-900 text-xs font-semibold shadow-xs transition flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-calendar-day text-orange-600"></i>
+                    <span class="hidden sm:inline">दैनिक पंचांग</span>
+                    <span class="sm:hidden">पंचांग</span>
+                </button>
+
+                <!-- 3-Line Hamburger Menu Button -->
+                <button type="button" id="mainHamburgerBtn" onclick="openDrawerMenu()" aria-label="मेनू खोलें" class="w-10 h-10 rounded-2xl bg-orange-50 hover:bg-orange-100 active:bg-orange-200 text-orange-800 flex items-center justify-center border border-orange-200 shadow-xs cursor-pointer ml-1">
+                    <i class="fa-solid fa-bars text-xl pointer-events-none"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Slide-over Drawer / Sidebar (3-Line Menu) -->
+    <div id="sideMenuDrawer" style="display: none; position: fixed; inset: 0; z-index: 999999;">
+        <!-- Backdrop Overlay -->
+        <div onclick="closeDrawerMenu()" style="position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.65); backdrop-filter: blur(2px); cursor: pointer;"></div>
+
+        <!-- Drawer Panel -->
+        <aside style="position: fixed; top: 0; right: 0; height: 100%; width: 20rem; max-width: 85vw; background-color: #ffffff; box-shadow: -10px 0 30px rgba(0,0,0,0.3); display: flex; flex-direction: column; z-index: 1000000; border-left: 1px solid #ffedd5;">
+            <!-- Drawer Header -->
+            <div class="p-5 border-b border-stone-100 bg-gradient-to-r from-orange-50 via-amber-50 to-orange-50 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-600 text-white flex items-center justify-center font-title text-xl font-bold shadow-xs">ॐ</span>
+                    <div>
+                        <h3 class="font-title text-lg font-bold text-stone-800 leading-none">ऊर्जा मेन्यू</h3>
+                        <span class="text-[11px] text-stone-500 font-medium">संस्थापक: ऋषभ कुमार शर्मा</span>
+                    </div>
+                </div>
+                <button type="button" onclick="closeDrawerMenu()" class="w-9 h-9 rounded-full bg-stone-100 hover:bg-orange-100 text-stone-600 hover:text-orange-700 flex items-center justify-center cursor-pointer transition">
+                    <i class="fa-solid fa-xmark text-lg pointer-events-none"></i>
+                </button>
+            </div>
+
+            <!-- Drawer Search Bar -->
+            <div class="p-4 border-b border-stone-100 bg-stone-50/70">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
+                    <input type="text" id="menuSearchInput" oninput="handleSearch(this.value)" placeholder="विचार, समाचार या विषय खोजें..." class="w-full pl-9 pr-3 py-2 rounded-xl border border-stone-200 text-xs focus:ring-2 focus:ring-orange-500 focus:outline-none bg-white">
+                </div>
+            </div>
+
+            <!-- Nav Links List -->
+            <nav class="flex-1 overflow-y-auto p-4 space-y-1 text-xs font-semibold text-stone-700">
+                <a href="javascript:void(0)" onclick="navigateMenu('home')" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-orange-50 hover:text-orange-700 transition">
+                    <i class="fa-solid fa-house text-orange-600 w-4 text-center"></i>
+                    <span>मुख्य पृष्ठ (Home)</span>
+                </a>
+                <a href="javascript:void(0)" onclick="navigateMenu('calendar')" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-orange-50 hover:text-orange-700 transition">
+                    <i class="fa-solid fa-calendar-day text-orange-600 w-4 text-center"></i>
+                    <span>दैनिक पंचांग एवं हिंदू कैलेंडर</span>
+                </a>
+                <a href="javascript:void(0)" onclick="navigateMenu('about')" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-orange-50 hover:text-orange-700 transition">
+                    <i class="fa-solid fa-user-tie text-orange-600 w-4 text-center"></i>
+                    <span>हमारे बारे में (About Rishabh Sharma)</span>
+                </a>
+                <a href="javascript:void(0)" onclick="navigateMenu('resources')" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-orange-50 hover:text-orange-700 transition">
+                    <i class="fa-solid fa-book-open-reader text-orange-600 w-4 text-center"></i>
+                    <span>रिसोर्स एवं ज्ञानकोश (Resources)</span>
+                </a>
+                <a href="javascript:void(0)" onclick="navigateMenu('newspaper')" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-orange-50 hover:text-orange-700 transition">
+                    <i class="fa-solid fa-newspaper text-orange-600 w-4 text-center"></i>
+                    <span>समाचार पत्र एवं ताज़ा अपडेट (News)</span>
+                </a>
+                <a href="javascript:void(0)" onclick="navigateMenu('daily')" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-orange-50 hover:text-orange-700 transition">
+                    <i class="fa-solid fa-sun text-orange-600 w-4 text-center"></i>
+                    <span>आज का सुविचार (Daily Quote)</span>
+                </a>
+                <a href="javascript:void(0)" onclick="navigateMenu('archive')" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-orange-50 hover:text-orange-700 transition">
+                    <i class="fa-solid fa-box-archive text-orange-600 w-4 text-center"></i>
+                    <span>मासिक एवं वार्षिक संग्रह (Archive)</span>
+                </a>
+
+                <div class="pt-3 pb-1 border-t border-stone-100 my-2">
+                    <span class="text-[10px] uppercase font-bold text-stone-400 px-3 tracking-wider">श्रेणियाँ (Categories)</span>
+                </div>
+                <a href="javascript:void(0)" onclick="filterCategory('all'); closeDrawerMenu();" class="flex items-center gap-3 px-3.5 py-2 rounded-xl hover:bg-orange-50 hover:text-orange-700 transition text-stone-600">
+                    <i class="fa-solid fa-layer-group text-stone-500 w-4 text-center"></i>
+                    <span>समस्त पोस्ट्स</span>
+                </a>
+                <a href="javascript:void(0)" onclick="filterCategory('urja'); closeDrawerMenu();" class="flex items-center gap-3 px-3.5 py-2 rounded-xl hover:bg-orange-50 hover:text-orange-700 transition text-stone-600">
+                    <i class="fa-solid fa-fire-flame-curved text-amber-500 w-4 text-center"></i>
+                    <span>ऊर्जा विचार</span>
+                </a>
+                <a href="javascript:void(0)" onclick="filterCategory('news'); closeDrawerMenu();" class="flex items-center gap-3 px-3.5 py-2 rounded-xl hover:bg-orange-50 hover:text-orange-700 transition text-stone-600">
+                    <i class="fa-regular fa-newspaper text-stone-500 w-4 text-center"></i>
+                    <span>सकारात्मक समाचार</span>
+                </a>
+                <a href="javascript:void(0)" onclick="filterCategory('cricket'); closeDrawerMenu();" class="flex items-center gap-3 px-3.5 py-2 rounded-xl hover:bg-orange-50 hover:text-orange-700 transition text-stone-600">
+                    <i class="fa-solid fa-baseball-bat-ball text-green-600 w-4 text-center"></i>
+                    <span>क्रिकेट एवं खेल</span>
+                </a>
+                <a href="javascript:void(0)" onclick="filterCategory('entertainment'); closeDrawerMenu();" class="flex items-center gap-3 px-3.5 py-2 rounded-xl hover:bg-orange-50 hover:text-orange-700 transition text-stone-600">
+                    <i class="fa-solid fa-masks-theater text-purple-600 w-4 text-center"></i>
+                    <span>मनोरंजन</span>
+                </a>
+            </nav>
+
+            <!-- Drawer Footer Branding -->
+            <div class="p-4 border-t border-stone-100 bg-stone-50 text-center">
+                <p class="text-xs font-semibold text-stone-700">ऊर्जा वेब पोर्टल</p>
+                <p class="text-[10px] text-stone-400 mt-0.5">संस्थापक एवं संचालक: ऋषभ कुमार शर्मा</p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Sacred Sunrise Divine Header -->
+    <section class="relative overflow-hidden bg-gradient-to-b from-amber-500 via-orange-600 to-amber-700 text-white pt-8 pb-14 px-4 shadow-inner">
+        <!-- Sunrise Ambient Lighting Circles -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-96 h-96 rounded-full bg-amber-300/30 blur-3xl sun-aura"></div>
+            <div class="w-64 h-64 rounded-full bg-yellow-200/40 blur-2xl sun-aura"></div>
+        </div>
+
+        <div class="relative max-w-4xl mx-auto text-center flex flex-col items-center">
+            <!-- Glowing Om Symbol -->
+            <div class="text-6xl sm:text-7xl font-title text-amber-100 om-glow select-none mb-1">
+                ॐ
+            </div>
+
+            <!-- Meditation Silhouette SVG -->
+            <div class="w-36 h-28 my-1 flex items-center justify-center drop-shadow-lg">
+                <svg viewBox="0 0 100 100" class="w-full h-full fill-amber-100" opacity="0.95">
+                    <circle cx="50" cy="22" r="8" />
+                    <path d="M42 32 C38 36, 32 44, 30 52 C35 53, 45 52, 50 52 C55 52, 65 53, 70 52 C68 44, 62 36, 58 32 Z" />
+                    <path d="M30 52 C24 55, 18 64, 16 72 C22 75, 34 72, 40 68 C44 71, 56 71, 60 68 C66 72, 78 75, 84 72 C82 64, 76 55, 70 52 C66 58, 62 65, 50 65 C38 65, 34 58, 30 52 Z" />
+                    <path d="M22 73 C28 78, 42 79, 50 79 C58 79, 72 78, 78 73 C70 76, 58 76, 50 76 C42 76, 30 76, 22 73 Z" opacity="0.7"/>
+                </svg>
+            </div>
+
+            <!-- Main Heading: Only "ऊर्जा" -->
+            <h2 class="text-4xl sm:text-5xl font-bold font-title tracking-wider text-amber-50 drop-shadow-md">
+                ऊर्जा
+            </h2>
+            <p class="text-xs sm:text-sm text-amber-100/90 font-medium max-w-md mt-1 leading-relaxed">
+                आत्म-विकास, सकारात्मक ऊर्जा, और मन की एकाग्रता का पावन संगम
+            </p>
+
+            <!-- Founder & Owner Badge: ऋषभ कुमार शर्मा -->
+            <div class="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/25 backdrop-blur-md border border-amber-300/40 text-amber-100 text-xs shadow-md">
+                <i class="fa-solid fa-crown text-amber-300 text-xs"></i>
+                <span class="font-medium">संस्थापक एवं संचालक:</span>
+                <strong class="text-white font-bold tracking-wide">ऋषभ कुमार शर्मा</strong>
+                <i class="fa-solid fa-circle-check text-sky-400 text-xs ml-0.5" title="सत्यापित संचालक"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto px-4 -mt-8 flex-1 w-full pb-16 z-10">
+
+        <!-- Top "Quote of the Day" (दैनिक सुविचार) Box -->
+        <div id="dailySuvicharBox" class="mb-6 rounded-3xl bg-gradient-to-r from-amber-500 via-orange-600 to-amber-600 text-white p-6 sm:p-7 shadow-xl border-2 border-amber-300/60 relative overflow-hidden">
+            <div class="absolute -right-8 -bottom-8 w-40 h-40 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
+
+            <div class="flex items-center justify-between border-b border-white/20 pb-3 mb-4">
+                <div class="flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center font-title text-lg shadow-xs">ॐ</span>
+                    <div>
+                        <h3 class="font-title text-base sm:text-lg font-bold text-amber-100 leading-tight">आज का विशेष सुविचार</h3>
+                        <p class="text-[11px] text-amber-200/90" id="dailySuvicharDate">शुभ प्रभात • आज का दिन मंगलमय हो</p>
+                    </div>
+                </div>
+                <!-- Subtle edit trigger for admin -->
+                <button onclick="handleAdminQuoteClick()" class="text-[11px] font-bold px-3 py-1 rounded-full bg-white/20 hover:bg-white/30 text-white backdrop-blur-xs flex items-center gap-1.5 transition cursor-pointer">
+                    <i class="fa-solid fa-sun text-yellow-300"></i>
+                    <span>सुविचार</span>
+                </button>
+            </div>
+
+            <!-- Suvichar Body -->
+            <div class="my-3">
+                <p id="dailySuvicharText" class="font-title text-xl sm:text-2xl font-bold leading-relaxed tracking-wide text-amber-50 drop-shadow-xs">
+                    "सवेरा हर रोज़ नया अवसर लेकर आता है, अपने भीतर की ऊर्जा को जगाइए और अपने लक्ष्य की ओर बढ़िए।"
+                </p>
+                <p id="dailySuvicharSub" class="text-right text-xs sm:text-sm text-amber-200 mt-2 font-medium tracking-wide">
+                    — ऋषभ कुमार शर्मा (संपादक)
+                </p>
+            </div>
+
+            <!-- Suvichar Actions -->
+            <div class="mt-4 pt-3 border-t border-white/20 flex items-center justify-between text-xs">
+                <div class="flex items-center gap-4">
+                    <button type="button" onclick="handleDailyLike()" class="flex items-center gap-1.5 bg-white/20 hover:bg-white/30 px-3.5 py-1.5 rounded-full transition cursor-pointer active:scale-95">
+                        <i id="dailyLikeHeart" class="fa-regular fa-heart text-base"></i>
+                        <span id="dailyLikeCount" class="font-bold">108</span>
+                    </button>
+                    <button type="button" onclick="openCommentModal('daily-suvichar')" class="flex items-center gap-1.5 bg-white/20 hover:bg-white/30 px-3.5 py-1.5 rounded-full transition cursor-pointer">
+                        <i class="fa-regular fa-comment text-base"></i>
+                        <span id="dailyCommentCount" class="font-bold">0</span>
+                    </button>
+                </div>
+                <button type="button" onclick="handleDailyShare()" class="flex items-center gap-1.5 bg-white text-orange-800 hover:bg-amber-100 px-4 py-1.5 rounded-full font-bold shadow-md transition cursor-pointer">
+                    <i class="fa-brands fa-whatsapp text-green-600 text-sm"></i>
+                    <span>शेयर करें</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Filter Categories Row & Archive Filter Active Bar -->
+        <div class="mt-4">
+            <!-- Archive Active Filter Badge (if selected) -->
+            <div id="activeArchiveBadge" class="hidden items-center justify-between bg-amber-100/90 border border-amber-300 text-amber-900 px-4 py-2.5 rounded-2xl mb-3 text-xs shadow-xs">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-box-archive text-orange-600"></i>
+                    <span>संग्रह फ़िल्टर सक्रिय: <strong id="activeArchiveText">नवंबर 2026</strong> की पोस्ट्स</span>
+                </div>
+                <button type="button" onclick="clearArchiveFilter()" class="hover:text-red-700 font-bold underline cursor-pointer">
+                    फ़िल्टर हटाएं ✕
+                </button>
+            </div>
+
+            <!-- Inline Category Row & Archive Shortcut -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-4">
+                <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+                    <button type="button" onclick="filterCategory('all')" id="cat-all" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-bold transition flex items-center gap-1.5 shrink-0 cursor-pointer bg-stone-100 text-stone-700 hover:bg-orange-50">
+                        <span>समस्त</span>
+                    </button>
+                    <button type="button" onclick="filterCategory('urja')" id="cat-urja" class="cat-pill active px-3.5 py-1.5 rounded-full text-xs font-bold transition flex items-center gap-1.5 shrink-0 cursor-pointer bg-orange-600 text-white shadow-xs">
+                        <i class="fa-solid fa-fire-flame-curved text-amber-300"></i>
+                        <span>ऊर्जा</span>
+                    </button>
+                    <button type="button" onclick="filterCategory('news')" id="cat-news" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-bold transition flex items-center gap-1.5 shrink-0 cursor-pointer bg-stone-100 text-stone-700 hover:bg-orange-50">
+                        <i class="fa-regular fa-newspaper"></i>
+                        <span>समाचार</span>
+                    </button>
+                    <button type="button" onclick="filterCategory('cricket')" id="cat-cricket" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-bold transition flex items-center gap-1.5 shrink-0 cursor-pointer bg-stone-100 text-stone-700 hover:bg-orange-50">
+                        <i class="fa-solid fa-baseball-bat-ball text-green-600"></i>
+                        <span>क्रिकेट</span>
+                    </button>
+                    <button type="button" onclick="filterCategory('entertainment')" id="cat-entertainment" class="cat-pill px-3.5 py-1.5 rounded-full text-xs font-bold transition flex items-center gap-1.5 shrink-0 cursor-pointer bg-stone-100 text-stone-700 hover:bg-orange-50">
+                        <i class="fa-solid fa-masks-theater text-purple-600"></i>
+                        <span>मनोरंजन</span>
+                    </button>
+                </div>
+
+                <!-- Archive Button in Category Bar -->
+                <button type="button" onclick="openArchiveModal()" class="px-3.5 py-1.5 rounded-full border border-orange-200 bg-orange-50/90 hover:bg-orange-100 text-orange-800 text-xs font-semibold flex items-center justify-center gap-1.5 shrink-0 transition cursor-pointer shadow-xs">
+                    <i class="fa-solid fa-box-archive text-orange-600"></i>
+                    <span>माह / वर्ष संग्रह</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Feed of Posts -->
+        <div id="postsFeed" class="space-y-6 mt-4">
+            <!-- Dynamically populated posts -->
+        </div>
+
+        <!-- Founder Profile Card at Footer of Feed -->
+        <div class="mt-12 rounded-3xl bg-gradient-to-br from-amber-50 to-orange-100 border border-orange-200 p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left shadow-sm">
+            <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-amber-500 to-orange-600 text-white flex items-center justify-center font-title text-4xl shadow-md shrink-0">
+                ॐ
+            </div>
+            <div>
+                <div class="flex items-center justify-center sm:justify-start gap-2">
+                    <h3 class="text-xl font-bold font-title text-stone-800">ऋषभ कुमार शर्मा</h3>
+                    <i class="fa-solid fa-circle-check text-sky-500 text-sm" title="सत्यापित संस्थापक"></i>
+                </div>
+                <p class="text-xs font-bold text-orange-700 uppercase tracking-wider mt-0.5">संस्थापक एवं मुख्य संपादक • ऊर्जा</p>
+                <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                    "हमारा उद्देश्य केवल शब्द साझा करना नहीं, बल्कि हर पाठक के हृदय में सकारात्मक ऊर्जा, लक्ष्य के प्रति समर्पण और सनातन जीवन मूल्यों की ज्योति प्रज्वलित करना है।"
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Comprehensive Dynamic Hindu Calendar & Panchang Modal -->
+    <div id="calendarModal" style="display: none; position: fixed; inset: 0; z-index: 1000000;">
+        <div onclick="closeCalendarModal()" style="position: fixed; inset: 0; background-color: rgba(0,0,0,0.65); backdrop-filter: blur(2px); cursor: pointer;"></div>
+        <div style="position: relative; margin: 30px auto; max-width: 38rem; width: 92%; background: #ffffff; border-radius: 1.5rem; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); max-height: 88vh; overflow-y: auto; border: 1px solid #ffedd5;">
+            
+            <!-- Modal Header with Date Navigator -->
+            <div class="flex items-center justify-between pb-3 border-b border-stone-100 mb-4">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-600 text-white flex items-center justify-center font-title text-lg shadow-xs">ॐ</span>
+                    <div>
+                        <h3 class="font-title text-lg font-bold text-stone-800 leading-none">वैदिक पंचांग एवं हिंदू कैलेंडर</h3>
+                        <span class="text-[11px] text-stone-500 font-medium">लाइव दैनिक गणना • सूर्योदय, मुहूर्त एवं तिथि</span>
+                    </div>
+                </div>
+                <button type="button" onclick="closeCalendarModal()" class="w-8 h-8 rounded-full hover:bg-stone-100 text-stone-400 hover:text-stone-700 flex items-center justify-center cursor-pointer transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Panchang View Tabs -->
+            <div class="flex items-center gap-2 border-b border-stone-100 pb-3 mb-4">
+                <button type="button" onclick="switchPanchangTab('today')" id="tabBtnPanchangToday" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-orange-600 text-white shadow-xs cursor-pointer">
+                    दैनिक पंचांग
+                </button>
+                <button type="button" onclick="switchPanchangTab('festivals')" id="tabBtnPanchangFestivals" class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-stone-100 text-stone-600 hover:bg-orange-50 cursor-pointer">
+                    धार्मिक व्रत एवं पर्व
+                </button>
+                <button type="button" onclick="switchPanchangTab('grahan')" id="tabBtnPanchangGrahan" class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-stone-100 text-stone-600 hover:bg-orange-50 cursor-pointer">
+                    सूर्य व चंद्र ग्रहण
+                </button>
+            </div>
+
+            <!-- TAB 1: Dynamic Vedic Panchang for Current Selected Date -->
+            <div id="panchangViewToday" class="space-y-4">
+                
+                <!-- Date Bar with Day Switcher Buttons -->
+                <div class="flex items-center justify-between bg-orange-50 px-3 py-2 rounded-2xl border border-orange-200">
+                    <button type="button" onclick="changePanchangDate(-1)" class="px-2.5 py-1 rounded-xl bg-white text-orange-700 hover:bg-orange-100 text-xs font-bold shadow-xs cursor-pointer">
+                        <i class="fa-solid fa-chevron-left mr-1"></i> पिछला दिन
+                    </button>
+                    <div class="text-center">
+                        <span id="panchangDisplayDate" class="font-bold text-stone-800 text-xs sm:text-sm block">--</span>
+                        <button type="button" onclick="resetPanchangToToday()" class="text-[10px] text-orange-600 font-semibold underline cursor-pointer">आज पर लौटें</button>
+                    </div>
+                    <button type="button" onclick="changePanchangDate(1)" class="px-2.5 py-1 rounded-xl bg-white text-orange-700 hover:bg-orange-100 text-xs font-bold shadow-xs cursor-pointer">
+                        अगला दिन <i class="fa-solid fa-chevron-right ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- Sun, Moon & Sky Spotlight Box -->
+                <div class="p-4 rounded-2xl bg-gradient-to-br from-amber-500 via-orange-600 to-red-600 text-white shadow-md">
+                    <div class="flex items-center justify-between border-b border-white/20 pb-2 mb-3">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-sun text-yellow-200 text-base"></i>
+                            <span class="font-bold text-sm" id="panchangSamvatHeader">विक्रम संवत गणना</span>
+                        </div>
+                        <span id="panchangSamvatBadge" class="px-2.5 py-0.5 rounded-full bg-white/20 text-[10px] font-bold backdrop-blur-xs">संवत</span>
+                    </div>
+
+                    <!-- 4 Astronomical Timings Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                        <div class="bg-black/15 p-2 rounded-xl text-center">
+                            <span class="opacity-80 block text-[10px]"><i class="fa-solid fa-sun text-amber-300 mr-1"></i>सूर्योदय</span>
+                            <strong id="dynamicSunrise" class="text-xs font-bold mt-0.5 block">06:15 AM</strong>
+                        </div>
+                        <div class="bg-black/15 p-2 rounded-xl text-center">
+                            <span class="opacity-80 block text-[10px]"><i class="fa-solid fa-sunset text-orange-300 mr-1"></i>सूर्यास्त</span>
+                            <strong id="dynamicSunset" class="text-xs font-bold mt-0.5 block">05:25 PM</strong>
+                        </div>
+                        <div class="bg-black/15 p-2 rounded-xl text-center">
+                            <span class="opacity-80 block text-[10px]"><i class="fa-solid fa-moon text-sky-200 mr-1"></i>चंद्रोदय</span>
+                            <strong id="dynamicMoonrise" class="text-xs font-bold mt-0.5 block">06:40 AM</strong>
+                        </div>
+                        <div class="bg-black/15 p-2 rounded-xl text-center">
+                            <span class="opacity-80 block text-[10px]"><i class="fa-regular fa-moon text-stone-300 mr-1"></i>वार / दिन</span>
+                            <strong id="dynamicVaar" class="text-xs font-bold mt-0.5 block">रविवार</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Tithi, Nakshatra, Karana Details Grid -->
+                <div class="grid grid-cols-2 gap-2.5 text-xs">
+                    <div class="p-3 bg-orange-50/80 rounded-2xl border border-orange-200">
+                        <span class="text-stone-500 text-[10px] block font-semibold">तिथि एवं पक्ष</span>
+                        <strong id="dynamicTithi" class="text-stone-800 text-xs block mt-0.5">--</strong>
+                        <span id="dynamicPaksha" class="text-[10px] text-orange-700 block mt-0.5">--</span>
+                    </div>
+                    <div class="p-3 bg-amber-50/80 rounded-2xl border border-amber-200">
+                        <span class="text-stone-500 text-[10px] block font-semibold">नक्षत्र एवं पद</span>
+                        <strong id="dynamicNakshatra" class="text-stone-800 text-xs block mt-0.5">--</strong>
+                        <span id="dynamicNakshatraSub" class="text-[10px] text-amber-700 block mt-0.5">शुभ एवं गतिमान</span>
+                    </div>
+                    <div class="p-3 bg-stone-50 rounded-2xl border border-stone-200">
+                        <span class="text-stone-500 text-[10px] block font-semibold">योग</span>
+                        <strong id="dynamicYoga" class="text-stone-800 text-xs block mt-0.5">--</strong>
+                        <span class="text-[10px] text-stone-600 block mt-0.5">दैनिक वैदिक योग</span>
+                    </div>
+                    <div class="p-3 bg-stone-50 rounded-2xl border border-stone-200">
+                        <span class="text-stone-500 text-[10px] block font-semibold">करण</span>
+                        <strong id="dynamicKarana" class="text-stone-800 text-xs block mt-0.5">--</strong>
+                        <span class="text-[10px] text-stone-600 block mt-0.5">दैनिक करण चक्र</span>
+                    </div>
+                </div>
+
+                <!-- Dynamic Auspicious (Abhijit) & Inauspicious (Rahu Kaal) Muhurat -->
+                <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-2.5 text-xs">
+                    <h4 class="font-bold text-stone-800 text-xs flex items-center gap-1.5">
+                        <i class="fa-solid fa-clock-rotate-left text-orange-600"></i>
+                        <span>शुभ एवं अशुभ मुहूर्त (वार अनुसार गणना)</span>
+                    </h4>
+                    <div class="grid grid-cols-2 gap-2 pt-1">
+                        <div class="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200">
+                            <span class="text-emerald-800 font-bold block text-[11px] flex items-center gap-1">
+                                <i class="fa-solid fa-circle-check text-emerald-600"></i> अभिजीत मुहूर्त (शुभ)
+                            </span>
+                            <span id="dynamicAbhijit" class="text-stone-700 text-xs font-semibold block mt-0.5">11:42 AM - 12:28 PM</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-rose-50 border border-rose-200">
+                            <span class="text-rose-800 font-bold block text-[11px] flex items-center gap-1">
+                                <i class="fa-solid fa-triangle-exclamation text-rose-600"></i> राहुकाल (अशुभ)
+                            </span>
+                            <span id="dynamicRahuKaal" class="text-stone-700 text-xs font-semibold block mt-0.5">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: Sacred Festivals & Vrats Calendar -->
+            <div id="panchangViewFestivals" class="space-y-3 hidden">
+                <div class="flex items-center justify-between pb-1">
+                    <h4 class="font-bold text-stone-800 text-xs flex items-center gap-1.5">
+                        <i class="fa-solid fa-om text-orange-600"></i>
+                        <span>प्रमुख वार्षिक व्रत, पर्व एवं सनातन छुट्टियाँ</span>
+                    </h4>
+                    <span class="text-[10px] text-orange-700 bg-orange-50 font-bold px-2 py-0.5 rounded-full border border-orange-200">वार्षिक पंचांग</span>
+                </div>
+
+                <div class="space-y-2 max-h-72 overflow-y-auto pr-1 text-xs">
+                    <div class="p-3 rounded-2xl bg-orange-50/90 border border-orange-200 flex items-center justify-between">
+                        <div>
+                            <span class="font-bold text-stone-900 block text-sm">दीपावली एवं श्रीलक्ष्मी पूजन</span>
+                            <span class="text-[10px] text-stone-500">कार्तिक अमावस्या • धन, प्रकाश व सुख-समृद्धि का महापर्व</span>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-xl bg-orange-600 text-white font-bold text-[11px] shrink-0">कार्तिक मास</span>
+                    </div>
+
+                    <div class="p-3 rounded-2xl bg-amber-50/90 border border-amber-200 flex items-center justify-between">
+                        <div>
+                            <span class="font-bold text-stone-900 block text-sm">छठ पूजा (सूर्य षष्ठी व्रत)</span>
+                            <span class="text-[10px] text-stone-500">कार्तिक शुक्ल षष्ठी • भगवान भास्कर को पावन अर्घ्य</span>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-xl bg-amber-600 text-white font-bold text-[11px] shrink-0">कार्तिक मास</span>
+                    </div>
+
+                    <div class="p-3 rounded-2xl bg-stone-50 border border-stone-200 flex items-center justify-between">
+                        <div>
+                            <span class="font-bold text-stone-900 block text-sm">देवउठनी एकादशी एवं तुलसी विवाह</span>
+                            <span class="text-[10px] text-stone-500">कार्तिक शुक्ल एकादशी • चतुर्मास संपन्न, मांगलिक कार्य आरंभ</span>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-xl bg-stone-700 text-white font-bold text-[11px] shrink-0">एकादशी</span>
+                    </div>
+
+                    <div class="p-3 rounded-2xl bg-orange-50/90 border border-orange-200 flex items-center justify-between">
+                        <div>
+                            <span class="font-bold text-stone-900 block text-sm">महाशिवरात्रि व्रत</span>
+                            <span class="text-[10px] text-stone-500">फाल्गुन कृष्ण चतुर्दशी • देवाधिदेव महादेव पूजन</span>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-xl bg-orange-600 text-white font-bold text-[11px] shrink-0">फाल्गुन मास</span>
+                    </div>
+
+                    <div class="p-3 rounded-2xl bg-amber-50/90 border border-amber-200 flex items-center justify-between">
+                        <div>
+                            <span class="font-bold text-stone-900 block text-sm">होलिका दहन एवं होली उत्सव</span>
+                            <span class="text-[10px] text-stone-500">फाल्गुन पूर्णिमा • बुराई पर अच्छाई की विजय</span>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-xl bg-amber-600 text-white font-bold text-[11px] shrink-0">फाल्गुन मास</span>
+                    </div>
+
+                    <div class="p-3 rounded-2xl bg-stone-50 border border-stone-200 flex items-center justify-between">
+                        <div>
+                            <span class="font-bold text-stone-900 block text-sm">चैत्र नवरात्रि एवं श्रीरामनवमी</span>
+                            <span class="text-[10px] text-stone-500">चैत्र शुक्ल नवमी • मर्यादा पुरुषोत्तम भगवान श्रीराम जन्मोत्सव</span>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-xl bg-orange-600 text-white font-bold text-[11px] shrink-0">चैत्र मास</span>
+                    </div>
+
+                    <div class="p-3 rounded-2xl bg-orange-50/90 border border-orange-200 flex items-center justify-between">
+                        <div>
+                            <span class="font-bold text-stone-900 block text-sm">रक्षाबंधन एवं श्रावणी पूर्णिमा</span>
+                            <span class="text-[10px] text-stone-500">श्रावण पूर्णिमा • रक्षा सूत्र एवं वैदिक उपाकर्म</span>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-xl bg-orange-600 text-white font-bold text-[11px] shrink-0">श्रावण मास</span>
+                    </div>
+
+                    <div class="p-3 rounded-2xl bg-amber-50/90 border border-amber-200 flex items-center justify-between">
+                        <div>
+                            <span class="font-bold text-stone-900 block text-sm">श्री कृष्ण जन्माष्टमी व्रत</span>
+                            <span class="text-[10px] text-stone-500">भाद्रपद कृष्ण अष्टमी • भगवान श्रीकृष्ण प्राकट्य</span>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-xl bg-amber-600 text-white font-bold text-[11px] shrink-0">भाद्रपद मास</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: Grahan (Solar & Lunar Eclipse Details) -->
+            <div id="panchangViewGrahan" class="space-y-3.5 hidden text-xs">
+                <div class="p-4 rounded-2xl bg-slate-900 text-amber-100 border border-slate-700 shadow-md">
+                    <div class="flex items-center gap-2 mb-2 text-amber-300 font-bold text-sm">
+                        <i class="fa-solid fa-circle-half-stroke"></i>
+                        <span>सूर्य ग्रहण एवं चंद्र ग्रहण विवरण</span>
+                    </div>
+                    <p class="text-stone-300 text-xs leading-relaxed">
+                        शास्त्रों के अनुसार ग्रहण काल में ध्यान, गायत्री मंत्र जप व ईश्वर स्मरण से आत्मिक बल कई गुना बढ़ जाता है।
+                    </p>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="p-3.5 rounded-2xl bg-orange-50 border border-orange-200">
+                        <div class="flex items-center justify-between mb-1">
+                            <strong class="text-stone-900 text-sm flex items-center gap-1.5">
+                                <i class="fa-solid fa-sun text-orange-600"></i> सूर्य ग्रहण (Solar Eclipse)
+                            </strong>
+                            <span class="px-2 py-0.5 rounded-lg bg-orange-200 text-orange-900 text-[10px] font-bold">सूतक: 12 घंटे पूर्व</span>
+                        </div>
+                        <p class="text-stone-600 text-xs mt-1">
+                            <strong>समय एवं प्रभाव:</strong> सूर्य ग्रहण सदैव अमावस्या को घटित होता है। इसका सूतक काल 12 घंटे पूर्व आरंभ हो जाता है। इस अवधि में भोजन निर्माण व मूर्तियों का स्पर्श वर्जित माना जाता है।
+                        </p>
+                    </div>
+
+                    <div class="p-3.5 rounded-2xl bg-indigo-50 border border-indigo-200">
+                        <div class="flex items-center justify-between mb-1">
+                            <strong class="text-stone-900 text-sm flex items-center gap-1.5">
+                                <i class="fa-solid fa-moon text-indigo-600"></i> चंद्र ग्रहण (Lunar Eclipse)
+                            </strong>
+                            <span class="px-2 py-0.5 rounded-lg bg-indigo-200 text-indigo-900 text-[10px] font-bold">सूतक: 9 घंटे पूर्व</span>
+                        </div>
+                        <p class="text-stone-600 text-xs mt-1">
+                            <strong>समय एवं प्रभाव:</strong> चंद्र ग्रहण पूर्णिमा तिथि पर लगता है। इसका सूतक काल 9 घंटे पूर्व शुरू होता है। ग्रहण समाप्त होने के उपरांत स्नान व दान का विशेष महात्म्य है।
+                        </p>
+                    </div>
+
+                    <div class="p-3 bg-stone-50 rounded-2xl border border-stone-200">
+                        <span class="font-bold text-stone-800 block text-xs">सूतक काल सावधानियाँ:</span>
+                        <ul class="list-disc list-inside text-stone-600 text-[11px] mt-1 space-y-0.5">
+                            <li>भोजन एवं पेय पदार्थों में तुलसी दल (पत्ते) पहले से डाल लें।</li>
+                            <li>ग्रहण काल में ॐ नमः शिवाय या महामृत्युंजय मंत्र का मानसिक जप करें।</li>
+                            <li>ग्रहण मोक्ष (समाप्ति) के बाद पूरे घर में गंगाजल छिड़कें और स्नान करें।</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5 pt-3 border-t border-stone-100 flex items-center justify-between">
+                <span class="text-[10px] text-stone-400">ऊर्जा वैदिक पंचांग • ऋषभ कुमार शर्मा</span>
+                <button type="button" onclick="closeCalendarModal()" class="px-5 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold cursor-pointer">
+                    बंद करें
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Admin / Login / Publish Modal (Activated via #admin URL hash) -->
+    <div id="adminModal" style="display: none; position: fixed; inset: 0; z-index: 1000000;">
+        <div onclick="closeAdminModal()" style="position: fixed; inset: 0; background-color: rgba(0,0,0,0.65); backdrop-filter: blur(2px); cursor: pointer;"></div>
+        <div style="position: relative; margin: 30px auto; max-width: 32rem; width: 92%; background: #ffffff; border-radius: 1.5rem; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); max-height: 90vh; overflow-y: auto; border: 1px solid #ffedd5;">
+            
+            <div class="flex items-center justify-between pb-3 border-b border-stone-100 mb-4">
+                <div class="flex items-center gap-2">
+                    <span class="text-orange-600 text-xl font-bold font-title">ॐ</span>
+                    <h3 class="font-title text-lg font-bold text-stone-800">एडमिन नियंत्रण एवं अपलोडर</h3>
+                </div>
+                <button type="button" onclick="closeAdminModal()" class="text-stone-400 hover:text-stone-700 p-1 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Passcode Gate (Hidden from public, requires password) -->
+            <div id="adminAuthGate" class="space-y-4">
+                <div class="p-3 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900">
+                    यह पैनल सुरक्षित है। कृपया जारी रखने के लिए संचालक सुरक्षा पासवर्ड दर्ज करें।
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 mb-1">सुरक्षा पासवर्ड दर्ज करें:</label>
+                    <input type="password" id="adminPassInput" placeholder="पासवर्ड यहाँ लिखें" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-orange-500 focus:outline-none">
+                </div>
+                <button type="button" onclick="verifyAdminPass()" class="w-full py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-semibold text-xs transition cursor-pointer shadow-md">
+                    सत्यापित करें
+                </button>
+            </div>
+
+            <!-- Create Post Form (Visible after authentication) -->
+            <form id="newPostForm" onsubmit="handlePostSubmit(event)" class="space-y-4 hidden">
+                <div class="flex items-center justify-between bg-green-50 border border-green-200 px-3 py-2 rounded-xl text-green-800 text-xs font-semibold">
+                    <span><i class="fa-solid fa-circle-check mr-1 text-green-600"></i> ऋषभ कुमार शर्मा (सत्यापित सत्र)</span>
+                    <button type="button" onclick="logoutAdmin()" class="text-stone-500 hover:text-red-600 underline text-[11px] cursor-pointer">लॉगआउट</button>
+                </div>
+
+                <!-- Admin Action: Edit Daily Quote or Add New Post -->
+                <div class="p-3 bg-orange-50 rounded-2xl border border-orange-200 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-orange-900"><i class="fa-solid fa-sun mr-1"></i>दैनिक सुविचार अपडेट करें</span>
+                        <button type="button" onclick="toggleDailyQuoteEditInAdmin()" class="text-[11px] text-orange-700 underline font-bold cursor-pointer">यहाँ संपादित करें</button>
+                    </div>
+                    <div id="adminDailyQuoteEditBox" class="hidden pt-2 space-y-2 border-t border-orange-200">
+                        <textarea id="adminDailyTextInput" rows="2" placeholder="आज का नया सुविचार..." class="w-full px-3 py-1.5 rounded-xl border border-orange-300 text-xs"></textarea>
+                        <input type="text" id="adminDailySubInput" value="— ऋषभ कुमार शर्मा (संपादक)" class="w-full px-3 py-1.5 rounded-xl border border-orange-300 text-xs">
+                        <button type="button" onclick="saveDailyQuoteFromAdmin()" class="px-3 py-1 rounded-lg bg-orange-600 text-white text-xs font-bold">सुविचार सहेजें</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 mb-1">श्रेणी (Category)</label>
+                    <select id="postCategory" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-orange-500 focus:outline-none bg-white">
+                        <option value="urja">ऊर्जा (प्रेरणा एवं सुविचार)</option>
+                        <option value="news">समाचार (News)</option>
+                        <option value="cricket">क्रिकेट (Cricket)</option>
+                        <option value="entertainment">मनोरंजन</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 mb-1">शीर्षक / मुख्य विचार</label>
+                    <input type="text" id="postTitle" required placeholder="जैसे: मन के हारे हार है, मन के जीते जीत..." class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-orange-500 focus:outline-none">
+                </div>
+
+                <!-- Post Format Selection: Image vs Text Card -->
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 mb-1">प्रारूप चुनें</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button type="button" id="typeBtnImage" onclick="selectPostType('image')" class="py-2 px-3 rounded-xl border-2 border-orange-600 bg-orange-50 text-orange-700 text-xs font-bold flex items-center justify-center gap-1.5 transition cursor-pointer">
+                            <i class="fa-regular fa-image"></i>
+                            <span>फ़ोटो / इमेज पोस्ट</span>
+                        </button>
+                        <button type="button" id="typeBtnText" onclick="selectPostType('text')" class="py-2 px-3 rounded-xl border border-stone-200 bg-stone-50 text-stone-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition cursor-pointer">
+                            <i class="fa-solid fa-palette"></i>
+                            <span>स्टाइलिश टेक्स्ट कार्ड</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Image Input Section -->
+                <div id="imageInputSection">
+                    <label class="block text-xs font-semibold text-stone-700 mb-1">इमेज लिंक (URL) या फ़ाइल चुनें</label>
+                    <input type="url" id="postImageUrl" placeholder="https://... इमेज का डायरेक्ट लिंक" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-orange-500 focus:outline-none mb-2">
+                    
+                    <div class="relative border-2 border-dashed border-stone-300 rounded-xl p-3 text-center hover:bg-stone-50 transition cursor-pointer">
+                        <input type="file" id="postImageFile" accept="image/*" onchange="previewSelectedImage(event)" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+                        <p class="text-xs text-stone-500"><i class="fa-solid fa-upload mr-1"></i> या डिवाइस से फोटो अपलोड करें</p>
+                    </div>
+                    <div id="imagePreviewContainer" class="hidden mt-2">
+                        <img id="imagePreview" src="" alt="पूर्वावलोकन" class="w-full h-36 object-cover rounded-xl border">
+                    </div>
+                </div>
+
+                <!-- Text Card Styling Section -->
+                <div id="textStyleSection" class="hidden space-y-3 bg-amber-50/70 p-3.5 rounded-2xl border border-amber-200">
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 mb-1.5">कार्ड बैकग्राउंड और रंग चुनें</label>
+                        <div class="grid grid-cols-4 gap-2">
+                            <button type="button" onclick="selectCardBg('sunrise')" class="h-10 rounded-xl bg-gradient-to-r from-amber-500 via-orange-600 to-red-600 flex items-center justify-center text-white text-xs font-bold shadow-sm ring-2 ring-orange-500 ring-offset-1 bg-choice-btn cursor-pointer" data-bg="sunrise">सूर्योदय</button>
+                            <button type="button" onclick="selectCardBg('deepgold')" class="h-10 rounded-xl bg-gradient-to-br from-yellow-600 via-amber-700 to-stone-900 flex items-center justify-center text-amber-200 text-xs font-bold shadow-sm bg-choice-btn cursor-pointer" data-bg="deepgold">स्वर्ण</button>
+                            <button type="button" onclick="selectCardBg('divineblue')" class="h-10 rounded-xl bg-gradient-to-r from-sky-600 via-indigo-700 to-slate-900 flex items-center justify-center text-white text-xs font-bold shadow-sm bg-choice-btn cursor-pointer" data-bg="divineblue">शांत नीला</button>
+                            <button type="button" onclick="selectCardBg('forest')" class="h-10 rounded-xl bg-gradient-to-br from-emerald-600 via-teal-800 to-stone-900 flex items-center justify-center text-emerald-100 text-xs font-bold shadow-sm bg-choice-btn cursor-pointer" data-bg="forest">प्रकृति</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 mb-1">फ़ॉन्ट शैली</label>
+                        <select id="cardFontChoice" class="w-full px-3 py-1.5 rounded-xl border border-stone-300 text-xs font-semibold focus:ring-2 focus:ring-orange-500 focus:outline-none bg-white">
+                            <option value="font-title">रोझा (Rozha Classic Serif - ओजस्वी)</option>
+                            <option value="font-banner">यात्रा (Yatra Artistic - पारंपरिक कला)</option>
+                            <option value="font-hindi">हिन्द (Hind Modern - स्पष्ट एवं सरल)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 mb-1">विस्तृत विचार / व्याख्या (वैकल्पिक)</label>
+                    <textarea id="postDescription" rows="3" placeholder="यहाँ अपने विचार विस्तार से लिखें..." class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-orange-500 focus:outline-none"></textarea>
+                </div>
+
+                <div class="pt-2 flex justify-end gap-2">
+                    <button type="button" onclick="closeAdminModal()" class="px-4 py-2 rounded-xl border border-stone-300 text-stone-600 text-xs font-semibold hover:bg-stone-100 cursor-pointer">
+                        रद्द करें
+                    </button>
+                    <button type="submit" id="btnPublish" class="px-5 py-2 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white text-xs font-bold shadow-md flex items-center gap-1.5 cursor-pointer">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>प्रकाशित करें (Publish)</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Monthly & Yearly Archive Modal -->
+    <div id="archiveModal" style="display: none; position: fixed; inset: 0; z-index: 1000000;">
+        <div onclick="closeArchiveModal()" style="position: fixed; inset: 0; background-color: rgba(0,0,0,0.65); backdrop-filter: blur(2px); cursor: pointer;"></div>
+        <div style="position: relative; margin: 40px auto; max-width: 32rem; width: 92%; background: #ffffff; border-radius: 1.5rem; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); max-height: 85vh; overflow-y: auto; border: 1px solid #ffedd5;">
+            
+            <div class="flex items-center justify-between pb-3 border-b border-stone-100 mb-4">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-box-archive text-orange-600 text-lg"></i>
+                    <h3 class="font-title text-base font-bold text-stone-800">मासिक एवं वार्षिक संग्रह (Archive)</h3>
+                </div>
+                <button type="button" onclick="closeArchiveModal()" class="text-stone-400 hover:text-stone-700 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <p class="text-xs text-stone-500 mb-3 leading-relaxed">
+                ऋषभ कुमार शर्मा द्वारा समय-समय पर प्रकाशित सुविचारों एवं पोस्ट्स को महीने या वर्ष के अनुसार देखने के लिए चुनें:
+            </p>
+
+            <!-- Archive View Toggle (Monthly vs Yearly) -->
+            <div class="flex items-center gap-2 mb-4 bg-stone-100 p-1 rounded-2xl">
+                <button type="button" id="btnArchiveModeMonth" onclick="switchArchiveMode('month')" class="flex-1 py-1.5 rounded-xl text-xs font-bold bg-white text-orange-700 shadow-xs transition cursor-pointer">
+                    मासिक विवरण (Monthly)
+                </button>
+                <button type="button" id="btnArchiveModeYear" onclick="switchArchiveMode('year')" class="flex-1 py-1.5 rounded-xl text-xs font-semibold text-stone-600 hover:text-orange-700 transition cursor-pointer">
+                    वार्षिक संग्रह (Yearly)
+                </button>
+            </div>
+
+            <!-- Month/Year Filter Selection List -->
+            <div id="archiveListContainer" class="space-y-2.5">
+                <!-- Dynamically generated month/year cards -->
+            </div>
+
+            <div class="mt-5 pt-3 border-t border-stone-100 flex items-center justify-between">
+                <button type="button" onclick="clearArchiveFilter()" class="text-xs text-red-600 hover:text-red-700 font-semibold cursor-pointer">
+                    फ़िल्टर साफ़ करें
+                </button>
+                <button type="button" onclick="closeArchiveModal()" class="px-5 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold cursor-pointer">
+                    बंद करें
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Modal -->
+    <div id="aboutModal" style="display: none; position: fixed; inset: 0; z-index: 1000000;">
+        <div onclick="closeAboutModal()" style="position: fixed; inset: 0; background-color: rgba(0,0,0,0.65); backdrop-filter: blur(2px); cursor: pointer;"></div>
+        <div style="position: relative; margin: 40px auto; max-width: 32rem; width: 92%; background: #ffffff; border-radius: 1.5rem; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); max-height: 85vh; overflow-y: auto; border: 1px solid #ffedd5;">
+            
+            <div class="flex items-center justify-between pb-3 border-b border-stone-100 mb-4">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-user-tie text-orange-600 text-lg"></i>
+                    <h3 class="font-title text-base font-bold text-stone-800">हमारे बारे में (About Us)</h3>
+                </div>
+                <button type="button" onclick="closeAboutModal()" class="text-stone-400 hover:text-stone-700 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="space-y-4 text-xs text-stone-600 leading-relaxed">
+                <div class="text-center pb-2">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-600 text-white mx-auto flex items-center justify-center text-2xl font-title shadow-sm mb-2">ॐ</div>
+                    <h4 class="text-base font-bold text-stone-800 font-title">ऊर्जा - सकारात्मक विचारों का संगम</h4>
+                    <p class="text-orange-700 font-semibold text-[11px]">संस्थापक एवं संचालक: ऋषभ कुमार शर्मा</p>
+                </div>
+                <div class="p-4 bg-amber-50 rounded-2xl border border-amber-200">
+                    <p class="font-medium text-stone-800 mb-1.5"><strong>हमारा उद्देश्य:</strong></p>
+                    <p>यह पोर्टल समाज के प्रत्येक वर्ग, विशेषकर युवाओं में दैनिक सकारात्मक ऊर्जा, सनातन धर्म के शाश्वत संस्कार, आध्यात्मिक शांति और मानसिक शक्ति का संचार करने हेतु बनाया गया है।</p>
+                </div>
+                <div class="border-t border-stone-100 pt-3">
+                    <p class="text-stone-500"><strong>संचालक संदेश:</strong> "सकारात्मक सोच कोई जादू नहीं है, यह एक निरंतर अभ्यास है जो आपके जीवन की दिशा बदल देता है।" — ऋषभ कुमार शर्मा</p>
+                </div>
+            </div>
+            <div class="mt-5 pt-3 border-t border-stone-100 text-right">
+                <button type="button" onclick="closeAboutModal()" class="px-5 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold cursor-pointer">बंद करें</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resources Modal -->
+    <div id="resourcesModal" style="display: none; position: fixed; inset: 0; z-index: 1000000;">
+        <div onclick="closeResourcesModal()" style="position: fixed; inset: 0; background-color: rgba(0,0,0,0.65); backdrop-filter: blur(2px); cursor: pointer;"></div>
+        <div style="position: relative; margin: 40px auto; max-width: 32rem; width: 92%; background: #ffffff; border-radius: 1.5rem; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); max-height: 85vh; overflow-y: auto; border: 1px solid #ffedd5;">
+            
+            <div class="flex items-center justify-between pb-3 border-b border-stone-100 mb-4">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-book-open-reader text-orange-600 text-lg"></i>
+                    <h3 class="font-title text-base font-bold text-stone-800">रिसोर्स एवं ज्ञानकोश (Resources)</h3>
+                </div>
+                <button type="button" onclick="closeResourcesModal()" class="text-stone-400 hover:text-stone-700 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="space-y-3 text-xs text-stone-600">
+                <p class="text-stone-700 font-medium">ऋषभ कुमार शर्मा द्वारा संकलित उपयोगी प्रेरणादायक संसाधन:</p>
+                
+                <div class="p-3.5 rounded-2xl bg-orange-50/70 border border-orange-200 flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-orange-600 text-white flex items-center justify-center shrink-0 mt-0.5">
+                        <i class="fa-solid fa-spa text-xs"></i>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-stone-800 text-sm">दैनिक ध्यान एवं प्राणायाम गाइड</h5>
+                        <p class="mt-0.5 text-stone-600">मन को शांत और एकाग्र रखने के लिए 10 मिनट की सरल श्वास तकनीकें।</p>
+                    </div>
+                </div>
+
+                <div class="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200 flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-amber-600 text-white flex items-center justify-center shrink-0 mt-0.5">
+                        <i class="fa-solid fa-quote-left text-xs"></i>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-stone-800 text-sm">श्रेष्ठ 108 सुविचार संकलन</h5>
+                        <p class="mt-0.5 text-stone-600">संकल्प शक्ति और जीवन में सफलता पाने के अनमोल सनातन विचार।</p>
+                    </div>
+                </div>
+
+                <div class="p-3.5 rounded-2xl bg-stone-50 border border-stone-200 flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-stone-700 text-white flex items-center justify-center shrink-0 mt-0.5">
+                        <i class="fa-solid fa-clock text-xs"></i>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-stone-800 text-sm">समय प्रबंधन (Time Management) सूत्र</h5>
+                        <p class="mt-0.5 text-stone-600">विद्यार्थियों और युवाओं के लिए अपने दिन को उत्पादक बनाने की विधि।</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5 pt-3 border-t border-stone-100 text-right">
+                <button type="button" onclick="closeResourcesModal()" class="px-5 py-2 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold cursor-pointer">ठीक है</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comments Modal -->
+    <div id="commentModal" style="display: none; position: fixed; inset: 0; z-index: 1000000;">
+        <div onclick="closeCommentModal()" style="position: fixed; inset: 0; background-color: rgba(0,0,0,0.65); backdrop-filter: blur(2px); cursor: pointer;"></div>
+        <div style="position: relative; margin: 40px auto; max-width: 28rem; width: 92%; background: #ffffff; border-radius: 1.5rem; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); max-height: 85vh; display: flex; flex-direction: column; border: 1px solid #ffedd5;">
+            
+            <div class="flex items-center justify-between pb-3 border-b border-stone-100">
+                <h4 class="font-bold text-stone-800 text-sm flex items-center gap-2">
+                    <i class="fa-regular fa-comments text-orange-600"></i>
+                    <span>प्रतिक्रिया एवं टिप्पणियाँ</span>
+                </h4>
+                <button type="button" onclick="closeCommentModal()" class="text-stone-400 hover:text-stone-700 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Comments List -->
+            <div id="commentList" class="flex-1 overflow-y-auto py-4 space-y-3">
+                <!-- Dynamically loaded comments -->
+            </div>
+
+            <!-- New Comment Form -->
+            <form onsubmit="handleCommentSubmit(event)" class="pt-3 border-t border-stone-100 space-y-2">
+                <input type="text" id="commentUserName" required placeholder="आपका शुभ नाम..." class="w-full px-3 py-1.5 rounded-xl border border-stone-300 text-xs focus:ring-2 focus:ring-orange-500 focus:outline-none">
+                <div class="flex gap-2">
+                    <input type="text" id="commentText" required placeholder="विचार व्यक्त करें..." class="flex-1 px-3 py-1.5 rounded-xl border border-stone-300 text-xs focus:ring-2 focus:ring-orange-500 focus:outline-none">
+                    <button type="submit" class="px-4 py-1.5 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-xs font-semibold cursor-pointer">
+                        भेजें
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Box -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-stone-900 text-white px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-2 text-xs transition-opacity duration-300 opacity-0 pointer-events-none">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-green-400"></i>
+        <span id="toastMsg">सफलतापूर्वक पूर्ण!</span>
+    </div>
+
+    <!-- ==================== CORE JAVASCRIPT ==================== -->
+    <script>
+        /* ========================================================
+           SUPABASE INTEGRATION PLACEHOLDER
+           (यहाँ अपनी Supabase keys पेस्ट कर सकते हैं)
+        ======================================================== */
+        const SUPABASE_CONFIG = {
+            url: "",      // e.g. "https://xyzcompany.supabase.co"
+            anonKey: ""   // e.g. "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        };
+
+        // HIDDEN ADMIN CREDENTIALS
+        const ADMIN_SECRET_PASS = "Hris@1245#";
+        let isAdminLoggedIn = false;
+
+        // Daily Suvichar State
+        let dailySuvichar = {
+            id: "daily-suvichar",
+            text: "सवेरा हर रोज़ नया अवसर लेकर आता है, अपने भीतर की ऊर्जा को जगाइए और अपने लक्ष्य की ओर बढ़िए।",
+            sub: "— ऋषभ कुमार शर्मा (संपादक)",
+            date: new Date().toLocaleDateString('hi-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+            likes: 108,
+            userLiked: false,
+            comments: []
+        };
+
+        // App State
+        let currentTab = 'urja';
+        let postsData = [];
+        let activeCommentPostId = null;
+        let pendingImageDataUrl = "";
+        let selectedPostType = "image";
+        let selectedCardBg = "sunrise";
+        let searchQuery = "";
+        let selectedArchiveKey = null;
+        let currentArchiveMode = "month";
+
+        // Current Panchang Browsing Date
+        let panchangActiveDate = new Date();
+
+        const BG_THEMES = {
+            sunrise: "bg-gradient-to-br from-amber-500 via-orange-600 to-red-600 text-white",
+            deepgold: "bg-gradient-to-br from-yellow-600 via-amber-800 to-stone-900 text-amber-100",
+            divineblue: "bg-gradient-to-br from-sky-700 via-indigo-900 to-stone-950 text-sky-100",
+            forest: "bg-gradient-to-br from-emerald-600 via-teal-900 to-stone-950 text-emerald-100"
+        };
+
+        // Seed Initial Feed Posts
+        const SEED_POSTS = [
+            {
+                id: "seed-1",
+                category: "urja",
+                cardType: "text",
+                bgTheme: "sunrise",
+                fontFamily: "font-title",
+                title: "मन के हारे हार है, मन के जीते जीत।",
+                description: "जब तक आप भीतर से संकल्पित हैं, तब तक दुनिया की कोई भी शक्ति आपको पराजित नहीं कर सकती। अपने भीतर की ऊर्जा को पहचानिए।",
+                imageUrl: "",
+                likes: 38,
+                userLiked: false,
+                comments: [{ name: "अमित कुमार", text: "अति सुंदर विचार! दिन बन गया।" }],
+                date: "नवंबर 2026",
+                timestamp: new Date("2026-11-08").getTime()
+            },
+            {
+                id: "seed-2",
+                category: "urja",
+                cardType: "image",
+                title: "ध्यान और मौन: आत्मा का सर्वोच्च विश्राम",
+                description: "दिन भर की भागदौड़ में से केवल 10 मिनट मौन रहकर अपने श्वास को महसूस करें। यही सच्ची शांति का द्वार है।",
+                imageUrl: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1000&q=80",
+                likes: 54,
+                userLiked: false,
+                comments: [],
+                date: "नवंबर 2026",
+                timestamp: new Date("2026-11-05").getTime()
+            },
+            {
+                id: "seed-3",
+                category: "urja",
+                cardType: "text",
+                bgTheme: "deepgold",
+                fontFamily: "font-banner",
+                title: "धैर्य वह कड़वा पौधा है जिस पर फल सदा मीठे लगते हैं।",
+                description: "निरंतर कर्म करते रहें, फल समय आने पर प्रकृति स्वयं प्रदान करेगी। कभी निराश न हों।",
+                imageUrl: "",
+                likes: 47,
+                userLiked: false,
+                comments: [],
+                date: "अक्टूबर 2026",
+                timestamp: new Date("2026-10-24").getTime()
+            },
+            {
+                id: "seed-4",
+                category: "cricket",
+                cardType: "image",
+                title: "धैर्य और अनुशासन: मैदान से जीवन का सबक",
+                description: "क्रिकेट केवल एक खेल नहीं, बल्कि विपरीत परिस्थितियों में शांत रहकर मैच पलटने का हुनर सिखाता है।",
+                imageUrl: "https://images.unsplash.com/photo-1531415074868-036b1c575351?auto=format&fit=crop&w=1000&q=80",
+                likes: 62,
+                userLiked: false,
+                comments: [],
+                date: "अक्टूबर 2026",
+                timestamp: new Date("2026-10-15").getTime()
+            },
+            {
+                id: "seed-5",
+                category: "news",
+                cardType: "text",
+                bgTheme: "divineblue",
+                fontFamily: "font-hindi",
+                title: "सकारात्मक समाचार: स्वच्छता और हरियाली की नई मिसाल",
+                description: "युवाओं की टोली ने मिलकर नगर के पुराने तालाब को नया जीवन दिया। यही ऊर्जा हमारे समाज को आगे ले जाती है।",
+                imageUrl: "",
+                likes: 29,
+                userLiked: false,
+                comments: [],
+                date: "सितंबर 2026",
+                timestamp: new Date("2026-09-12").getTime()
+            },
+            {
+                id: "seed-6",
+                category: "entertainment",
+                cardType: "image",
+                title: "कला और संगीत: जीवन में ताजगी का स्रोत",
+                description: "संगीत आत्मा की भाषा है जो बिना शब्दों के सीधे हृदय को शांति और आनंद से भर देती है।",
+                imageUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1000&q=80",
+                likes: 41,
+                userLiked: false,
+                comments: [],
+                date: "अगस्त 2026",
+                timestamp: new Date("2026-08-10").getTime()
+            }
+        ];
+
+        /* ========================================================
+           DYNAMIC VEDIC PANCHANG ENGINE (Device Date Based)
+        ======================================================== */
+        const VEDIC_MASA = [
+            "चैत्र", "वैशाख", "ज्येष्ठ", "आषाढ़", "श्रावण", "भाद्रपद",
+            "अश्विन", "कार्तिक", "मार्गशीर्ष", "पौष", "माघ", "फाल्गुन"
+        ];
+
+        const VEDIC_TITHIS = [
+            "प्रतिपदा (प्रथमा)", "द्वितीया", "तृतीया", "चतुर्थी", "पंचमी", 
+            "षष्ठी", "सप्तमी", "अष्टमी", "नवमी", "दशमी", 
+            "एकादशी", "द्वादशी", "त्रयोदशी", "चतुर्दशी", "पूर्णिमा / अमावस्या"
+        ];
+
+        const VEDIC_NAKSHATRAS = [
+            "अश्विनी", "भरणी", "कृत्तिका", "रोहिणी", "मृगशिरा", "आर्द्रा",
+            "पुनर्वसु", "पुष्य", "अश्लेषा", "मघा", "पूर्वाफाल्गुनी", "उत्तराफाल्गुनी",
+            "हस्त", "चित्रा", "स्वाती", "विशाखा", "अनुराधा", "ज्येष्ठा",
+            "मूल", "पूर्वाषाढ़ा", "उत्तराषाढ़ा", "श्रवण", "धनिष्ठा", "शतभिषा",
+            "पूर्वाभाद्रपद", "उत्तराभाद्रपद", "रेवती"
+        ];
+
+        const VEDIC_YOGAS = [
+            "विष्कम्भ", "प्रीति", "आयुष्मान", "सौभाग्य", "शोभन", "अतिगण्ड",
+            "सुकर्मा", "धृति", "शूल", "गण्ड", "वृद्धि", "ध्रुव", "व्याघात",
+            "हर्षण", "वज्र", "सिद्धि", "व्यतीपात", "वरीयान्", "परिघ", "शिव",
+            "सिद्ध", "साध्य", "शुभ", "शुक्ल", "ब्रह्म", "इन्द्र", "वैधृति"
+        ];
+
+        const VEDIC_KARANAS = [
+            "बव", "बालव", "कौलव", "तैतिल", "गर", "वणिज", "विष्टि (भद्रा)",
+            "शकुनि", "चतुष्पाद", "नाग", "किंस्तुघ्न"
+        ];
+
+        const RAHU_KAAL_BY_DAY = [
+            "04:30 PM - 06:00 PM", // रविवार (Sunday = 0)
+            "07:30 AM - 09:00 AM", // सोमवार (Monday = 1)
+            "03:00 PM - 04:30 PM", // मंगलवार (Tuesday = 2)
+            "12:00 PM - 01:30 PM", // बुधवार (Wednesday = 3)
+            "01:30 PM - 03:00 PM", // गुरुवार (Thursday = 4)
+            "10:30 AM - 12:00 PM", // शुक्रवार (Friday = 5)
+            "09:00 AM - 10:30 AM"  // शनिवार (Saturday = 6)
+        ];
+
+        function calculateDynamicPanchang(targetDate) {
+            const date = new Date(targetDate);
+            const year = date.getFullYear();
+            const month = date.getMonth(); // 0-11
+            const dayOfMonth = date.getDate();
+            const dayOfWeek = date.getDay(); // 0-6
+
+            // Day of Year (1 - 366)
+            const startOfYear = new Date(year, 0, 1);
+            const diffTime = date.getTime() - startOfYear.getTime();
+            const dayOfYear = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
+            // Approximate Sunrise & Sunset (IST Daylight Cycle for India)
+            // Longest day near Day 172 (June), shortest near Day 355 (Dec)
+            const sunVariationMinutes = Math.sin((dayOfYear - 80) * (2 * Math.PI / 365)) * 36;
+            const sunriseBase = 6 * 60 + 15; // 06:15 AM
+            const sunsetBase = 17 * 60 + 45; // 05:45 PM
+
+            const sunriseTotalMinutes = Math.round(sunriseBase - (sunVariationMinutes * 0.7));
+            const sunsetTotalMinutes = Math.round(sunsetBase + (sunVariationMinutes * 0.8));
+
+            const sunriseStr = formatMinutesToTime(sunriseTotalMinutes);
+            const sunsetStr = formatMinutesToTime(sunsetTotalMinutes);
+
+            // Abhijit Muhurat: ~24 mins before and after solar noon (~12:05 PM)
+            const solarNoon = Math.round((sunriseTotalMinutes + sunsetTotalMinutes) / 2);
+            const abhijitStart = formatMinutesToTime(solarNoon - 24);
+            const abhijitEnd = formatMinutesToTime(solarNoon + 24);
+
+            // Vikram & Saka Samvat
+            // After Chaitra Shukla Pratipada (approx April), Vikram Samvat = Gregorian Year + 57
+            const isPostChaitra = month >= 3;
+            const vikramYear = year + (isPostChaitra ? 57 : 56);
+            const sakaYear = year - (isPostChaitra ? 78 : 79);
+
+            // Lunar Synodic Cycle (~29.530588 days)
+            // Reference: Known New Moon epoch
+            const refNewMoon = new Date('2024-01-11T11:57:00Z').getTime();
+            const daysSinceEpoch = (date.getTime() - refNewMoon) / (1000 * 60 * 60 * 24);
+            const lunarAge = ((daysSinceEpoch % 29.530588) + 29.530588) % 29.530588;
+
+            const tithiIndex = Math.min(14, Math.floor(lunarAge / (29.530588 / 30)) % 15);
+            const isShukla = (lunarAge < (29.530588 / 2));
+            const pakshaName = isShukla ? "शुक्ल पक्ष" : "कृष्ण पक्ष";
+
+            let tithiName = VEDIC_TITHIS[tithiIndex];
+            if (tithiIndex === 14) {
+                tithiName = isShukla ? "पूर्णिमा" : "अमावस्या";
+            }
+
+            // Approximate Lunar Month based on Solar Date + Epoch Adjustment
+            let masaIndex = (month + 10) % 12; // Approximation alignment
+            const masaName = VEDIC_MASA[masaIndex];
+
+            // 27 Nakshatras & 27 Yogas Cycle
+            const nakshatraIndex = Math.floor((dayOfYear * 1.05 + 12) % 27);
+            const nakshatraName = VEDIC_NAKSHATRAS[nakshatraIndex];
+
+            const yogaIndex = Math.floor((dayOfYear * 1.02 + 7) % 27);
+            const yogaName = VEDIC_YOGAS[yogaIndex];
+
+            const karanaIndex = (tithiIndex * 2 + (isShukla ? 0 : 1)) % 11;
+            const karanaName = VEDIC_KARANAS[karanaIndex];
+
+            // Moonrise approximation (progresses ~50 mins each day)
+            const moonriseMins = (sunriseTotalMinutes + Math.round(lunarAge * 49)) % (24 * 60);
+            const moonriseStr = formatMinutesToTime(moonriseMins);
+
+            const daysArr = ["रविवार", "सोमवार", "मंगलवार", "बुधवार", "गुरुवार", "शुक्रवार", "शनिवार"];
+            const vaarName = daysArr[dayOfWeek];
+
+            const rahuKaalStr = RAHU_KAAL_BY_DAY[dayOfWeek];
+
+            return {
+                formattedDate: date.toLocaleDateString('hi-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+                vikramSamvat: vikramYear,
+                sakaSamvat: sakaYear,
+                masaName: masaName,
+                pakshaName: pakshaName,
+                tithiName: tithiName,
+                nakshatraName: nakshatraName,
+                yogaName: yogaName,
+                karanaName: karanaName,
+                sunrise: sunriseStr,
+                sunset: sunsetStr,
+                moonrise: moonriseStr,
+                vaar: vaarName,
+                abhijit: `${abhijitStart} - ${abhijitEnd}`,
+                rahuKaal: rahuKaalStr
+            };
+        }
+
+        function formatMinutesToTime(totalMins) {
+            let m = (totalMins % 1440 + 1440) % 1440;
+            let hours = Math.floor(m / 60);
+            let mins = m % 60;
+            const period = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            if (hours === 0) hours = 12;
+            const hStr = String(hours).padStart(2, '0');
+            const mStr = String(mins).padStart(2, '0');
+            return `${hStr}:${mStr} ${period}`;
+        }
+
+        function updatePanchangUI() {
+            const data = calculateDynamicPanchang(panchangActiveDate);
+
+            const displayDateEl = document.getElementById('panchangDisplayDate');
+            if (displayDateEl) displayDateEl.innerText = data.formattedDate;
+
+            const headerEl = document.getElementById('panchangSamvatHeader');
+            if (headerEl) headerEl.innerText = `${data.masaName} मास • ${data.pakshaName}`;
+
+            const badgeEl = document.getElementById('panchangSamvatBadge');
+            if (badgeEl) badgeEl.innerText = `वि.सं. ${data.vikramSamvat} • शक ${data.sakaSamvat}`;
+
+            document.getElementById('dynamicSunrise').innerText = data.sunrise;
+            document.getElementById('dynamicSunset').innerText = data.sunset;
+            document.getElementById('dynamicMoonrise').innerText = data.moonrise;
+            document.getElementById('dynamicVaar').innerText = data.vaar;
+
+            document.getElementById('dynamicTithi').innerText = data.tithiName;
+            document.getElementById('dynamicPaksha').innerText = `${data.masaName} मास • ${data.pakshaName}`;
+            document.getElementById('dynamicNakshatra').innerText = data.nakshatraName;
+            document.getElementById('dynamicYoga').innerText = data.yogaName;
+            document.getElementById('dynamicKarana').innerText = data.karanaName;
+
+            document.getElementById('dynamicAbhijit').innerText = data.abhijit;
+            document.getElementById('dynamicRahuKaal').innerText = data.rahuKaal;
+        }
+
+        function changePanchangDate(dayOffset) {
+            panchangActiveDate.setDate(panchangActiveDate.getDate() + dayOffset);
+            updatePanchangUI();
+        }
+
+        function resetPanchangToToday() {
+            panchangActiveDate = new Date();
+            updatePanchangUI();
+            showToast("आज का पंचांग लोड हुआ", "fa-solid fa-sun text-amber-500");
+        }
+
+        /* --- DRAWER MENU CONTROLS (100% RELIABLE) --- */
+        function openDrawerMenu() {
+            const drawer = document.getElementById('sideMenuDrawer');
+            if (drawer) {
+                drawer.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeDrawerMenu() {
+            const drawer = document.getElementById('sideMenuDrawer');
+            if (drawer) {
+                drawer.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        }
+
+        function navigateMenu(route) {
+            closeDrawerMenu();
+            if (route === 'home') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                searchQuery = "";
+                clearArchiveFilter();
+                filterCategory('all');
+            } else if (route === 'calendar') {
+                openCalendarModal();
+            } else if (route === 'about') {
+                openAboutModal();
+            } else if (route === 'resources') {
+                openResourcesModal();
+            } else if (route === 'archive') {
+                openArchiveModal();
+            } else if (route === 'newspaper') {
+                searchQuery = "";
+                filterCategory('news');
+                showToast("समाचार पत्र एवं ताज़ा अपडेट्स", "fa-solid fa-newspaper text-orange-600");
+                const feed = document.getElementById('postsFeed');
+                if (feed) feed.scrollIntoView({ behavior: 'smooth' });
+            } else if (route === 'daily') {
+                const dailyBox = document.getElementById('dailySuvicharBox');
+                if (dailyBox) dailyBox.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        /* --- MODAL CONTROLS --- */
+        function openCalendarModal() {
+            updatePanchangUI();
+            switchPanchangTab('today');
+            document.getElementById('calendarModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCalendarModal() {
+            document.getElementById('calendarModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function openAboutModal() {
+            document.getElementById('aboutModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAboutModal() {
+            document.getElementById('aboutModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function openResourcesModal() {
+            document.getElementById('resourcesModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeResourcesModal() {
+            document.getElementById('resourcesModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function openArchiveModal() {
+            populateArchiveList();
+            document.getElementById('archiveModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeArchiveModal() {
+            document.getElementById('archiveModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        /* ========================================================
+           HIDDEN ADMIN MODAL CONTROLS (Triggered via URL #admin)
+        ======================================================== */
+        function checkUrlAdminHash() {
+            if (window.location.hash === "#admin") {
+                openAdminModal();
+            }
+        }
+
+        function openAdminModal() {
+            const modal = document.getElementById('adminModal');
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+
+            if (isAdminLoggedIn) {
+                document.getElementById('adminAuthGate').classList.add('hidden');
+                document.getElementById('newPostForm').classList.remove('hidden');
+                document.getElementById('adminDailyTextInput').value = dailySuvichar.text;
+                document.getElementById('adminDailySubInput').value = dailySuvichar.sub;
+            } else {
+                document.getElementById('adminAuthGate').classList.remove('hidden');
+                document.getElementById('newPostForm').classList.add('hidden');
+            }
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').style.display = 'none';
+            document.body.style.overflow = '';
+            if (window.location.hash === "#admin") {
+                history.replaceState(null, null, ' ');
+            }
+        }
+
+        function verifyAdminPass() {
+            const input = document.getElementById('adminPassInput').value;
+            if (input === ADMIN_SECRET_PASS) {
+                isAdminLoggedIn = true;
+                document.getElementById('adminAuthGate').classList.add('hidden');
+                document.getElementById('newPostForm').classList.remove('hidden');
+                document.getElementById('adminDailyTextInput').value = dailySuvichar.text;
+                document.getElementById('adminDailySubInput').value = dailySuvichar.sub;
+                showToast("पहचान सत्यापित! स्वागत है ऋषभ जी।", "fa-solid fa-lock-open text-green-400");
+            } else {
+                showToast("पासवर्ड अमान्य है।", "fa-solid fa-circle-exclamation text-red-400");
+            }
+        }
+
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            document.getElementById('adminAuthGate').classList.remove('hidden');
+            document.getElementById('newPostForm').classList.add('hidden');
+            document.getElementById('adminPassInput').value = "";
+            showToast("लॉगआउट संपन्न", "fa-solid fa-arrow-right-from-bracket text-stone-400");
+        }
+
+        function handleAdminQuoteClick() {
+            if (isAdminLoggedIn) {
+                openAdminModal();
+            } else {
+                showToast("आज का दिन मंगलमय हो!", "fa-solid fa-sun text-yellow-400");
+            }
+        }
+
+        function toggleDailyQuoteEditInAdmin() {
+            const box = document.getElementById('adminDailyQuoteEditBox');
+            box.classList.toggle('hidden');
+        }
+
+        function saveDailyQuoteFromAdmin() {
+            const text = document.getElementById('adminDailyTextInput').value.trim();
+            const sub = document.getElementById('adminDailySubInput').value.trim();
+
+            if (!text) return;
+            dailySuvichar.text = text;
+            dailySuvichar.sub = sub || "— ऋषभ कुमार शर्मा (संपादक)";
+            dailySuvichar.date = new Date().toLocaleDateString('hi-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            dailySuvichar.likes = 0;
+            dailySuvichar.userLiked = false;
+
+            saveDailySuvichar();
+            renderDailySuvichar();
+            showToast("आज का नया सुविचार अपडेट हो गया!", "fa-solid fa-sun text-amber-500");
+            toggleDailyQuoteEditInAdmin();
+        }
+
+        /* --- DAILY SUVICHAR DISPLAY & ACTIONS --- */
+        function renderDailySuvichar() {
+            const textEl = document.getElementById('dailySuvicharText');
+            const subEl = document.getElementById('dailySuvicharSub');
+            const dateEl = document.getElementById('dailySuvicharDate');
+            const likeCountEl = document.getElementById('dailyLikeCount');
+            const heartIcon = document.getElementById('dailyLikeHeart');
+            const commentCountEl = document.getElementById('dailyCommentCount');
+
+            if (textEl) textEl.innerText = `"${dailySuvichar.text}"`;
+            if (subEl) subEl.innerText = dailySuvichar.sub || "— ऋषभ कुमार शर्मा";
+            if (dateEl) dateEl.innerText = dailySuvichar.date;
+            if (likeCountEl) likeCountEl.innerText = dailySuvichar.likes;
+            if (commentCountEl) commentCountEl.innerText = dailySuvichar.comments ? dailySuvichar.comments.length : 0;
+
+            if (heartIcon) {
+                heartIcon.className = dailySuvichar.userLiked 
+                    ? "fa-solid fa-heart text-red-300 text-lg scale-110" 
+                    : "fa-regular fa-heart text-lg";
+            }
+        }
+
+        function saveDailySuvichar() {
+            localStorage.setItem('urja_daily_suvichar', JSON.stringify(dailySuvichar));
+        }
+
+        function handleDailyLike() {
+            if (dailySuvichar.userLiked) {
+                dailySuvichar.likes = Math.max(0, dailySuvichar.likes - 1);
+                dailySuvichar.userLiked = false;
+            } else {
+                dailySuvichar.likes = (dailySuvichar.likes || 0) + 1;
+                dailySuvichar.userLiked = true;
+                showToast("सुविचार पसंद आया!", "fa-solid fa-heart text-red-500");
+            }
+            saveDailySuvichar();
+            renderDailySuvichar();
+        }
+
+        function handleDailyShare() {
+            const shareText = `🌅 *आज का दैनिक सुविचार*\n"${dailySuvichar.text}"\n${dailySuvichar.sub}\n\nऊर्जा वेब पोर्टल पर पढ़ें: ${window.location.href}`;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'ऊर्जा - आज का सुविचार',
+                    text: shareText,
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                const tempInput = document.createElement("textarea");
+                tempInput.value = shareText;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                showToast("सुविचार शेयर लिंक कॉपी हो गया!", "fa-solid fa-check text-green-400");
+            }
+        }
+
+        /* --- PANCHANG TAB SWITCHER --- */
+        function switchPanchangTab(tab) {
+            const vToday = document.getElementById('panchangViewToday');
+            const vFestivals = document.getElementById('panchangViewFestivals');
+            const vGrahan = document.getElementById('panchangViewGrahan');
+
+            const bToday = document.getElementById('tabBtnPanchangToday');
+            const bFestivals = document.getElementById('tabBtnPanchangFestivals');
+            const bGrahan = document.getElementById('tabBtnPanchangGrahan');
+
+            const inactiveBtnClass = "px-3.5 py-1.5 rounded-full text-xs font-semibold bg-stone-100 text-stone-600 hover:bg-orange-50 cursor-pointer";
+            const activeBtnClass = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-orange-600 text-white shadow-xs cursor-pointer";
+
+            bToday.className = inactiveBtnClass;
+            bFestivals.className = inactiveBtnClass;
+            bGrahan.className = inactiveBtnClass;
+
+            vToday.classList.add('hidden');
+            vFestivals.classList.add('hidden');
+            vGrahan.classList.add('hidden');
+
+            if (tab === 'today') {
+                vToday.classList.remove('hidden');
+                bToday.className = activeBtnClass;
+                updatePanchangUI();
+            } else if (tab === 'festivals') {
+                vFestivals.classList.remove('hidden');
+                bFestivals.className = activeBtnClass;
+            } else if (tab === 'grahan') {
+                vGrahan.classList.remove('hidden');
+                bGrahan.className = activeBtnClass;
+            }
+        }
+
+        /* --- ARCHIVE LOGIC --- */
+        function switchArchiveMode(mode) {
+            currentArchiveMode = mode;
+            const btnMonth = document.getElementById('btnArchiveModeMonth');
+            const btnYear = document.getElementById('btnArchiveModeYear');
+
+            if (mode === 'month') {
+                btnMonth.className = "flex-1 py-1.5 rounded-xl text-xs font-bold bg-white text-orange-700 shadow-xs transition cursor-pointer";
+                btnYear.className = "flex-1 py-1.5 rounded-xl text-xs font-semibold text-stone-600 hover:text-orange-700 transition cursor-pointer";
+            } else {
+                btnYear.className = "flex-1 py-1.5 rounded-xl text-xs font-bold bg-white text-orange-700 shadow-xs transition cursor-pointer";
+                btnMonth.className = "flex-1 py-1.5 rounded-xl text-xs font-semibold text-stone-600 hover:text-orange-700 transition cursor-pointer";
+            }
+            populateArchiveList();
+        }
+
+        function populateArchiveList() {
+            const container = document.getElementById('archiveListContainer');
+            container.innerHTML = "";
+
+            const counts = {};
+            const yearCounts = {};
+
+            postsData.forEach(p => {
+                const d = new Date(p.timestamp || Date.now());
+                const y = d.getFullYear();
+                const m = String(d.getMonth() + 1).padStart(2, '0');
+                const key = `${y}-${m}`;
+
+                counts[key] = (counts[key] || 0) + 1;
+                yearCounts[y] = (yearCounts[y] || 0) + 1;
+            });
+
+            const monthNames = {
+                '01': 'जनवरी', '02': 'फ़रवरी', '03': 'मार्च', '04': 'अप्रैल',
+                '05': 'मई', '06': 'जून', '07': 'जुलाई', '08': 'अगस्त',
+                '09': 'सितंबर', '10': 'अक्टूबर', '11': 'नवंबर', '12': 'दिसंबर'
+            };
+
+            if (currentArchiveMode === 'year') {
+                const sortedYears = Object.keys(yearCounts).sort().reverse();
+                if (sortedYears.length === 0) {
+                    container.innerHTML = `<p class="text-xs text-stone-400 py-4 text-center">अभी कोई संग्रह उपलब्ध नहीं है।</p>`;
+                    return;
+                }
+                sortedYears.forEach(y => {
+                    const yBtn = document.createElement('button');
+                    yBtn.type = "button";
+                    yBtn.className = "w-full p-3.5 rounded-2xl bg-orange-50 hover:bg-orange-100 border border-orange-200 text-left transition flex items-center justify-between cursor-pointer";
+                    yBtn.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-xl bg-orange-600 text-white flex items-center justify-center text-xs">
+                                <i class="fa-solid fa-calendar"></i>
+                            </div>
+                            <div>
+                                <span class="font-bold text-xs text-stone-900 block">संपूर्ण वर्ष ${y}</span>
+                                <span class="text-[10px] text-stone-500">ऋषभ कुमार शर्मा के सभी विचार</span>
+                            </div>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-orange-600 text-white text-xs font-bold">${yearCounts[y]} पोस्ट्स</span>
+                    `;
+                    yBtn.onclick = () => selectArchive(y, `वर्ष ${y}`);
+                    container.appendChild(yBtn);
+                });
+            } else {
+                const sortedMonthKeys = Object.keys(counts).sort().reverse();
+                if (sortedMonthKeys.length === 0) {
+                    container.innerHTML = `<p class="text-xs text-stone-400 py-4 text-center">अभी कोई संग्रह उपलब्ध नहीं है।</p>`;
+                    return;
+                }
+                sortedMonthKeys.forEach(k => {
+                    const [y, m] = k.split('-');
+                    const monthHindi = monthNames[m] || m;
+                    const mBtn = document.createElement('button');
+                    mBtn.type = "button";
+                    mBtn.className = "w-full p-3 rounded-2xl bg-stone-50 hover:bg-amber-50 border border-stone-200 hover:border-amber-300 text-left transition flex items-center justify-between cursor-pointer";
+                    mBtn.innerHTML = `
+                        <div class="flex items-center gap-2.5">
+                            <i class="fa-regular fa-calendar-check text-amber-600 text-sm"></i>
+                            <div>
+                                <span class="font-bold text-xs text-stone-800">${monthHindi} ${y}</span>
+                                <span class="text-[10px] text-stone-400 block">ऋषभ कुमार शर्मा द्वारा प्रकाशित</span>
+                            </div>
+                        </div>
+                        <span class="px-2.5 py-0.5 rounded-full bg-stone-200 text-stone-700 text-xs font-semibold">${counts[k]} पोस्ट्स</span>
+                    `;
+                    mBtn.onclick = () => selectArchive(k, `${monthHindi} ${y}`);
+                    container.appendChild(mBtn);
+                });
+            }
+        }
+
+        function selectArchive(key, label) {
+            selectedArchiveKey = key;
+            closeArchiveModal();
+
+            const badge = document.getElementById('activeArchiveBadge');
+            const badgeText = document.getElementById('activeArchiveText');
+            if (badge && badgeText) {
+                badgeText.innerText = label;
+                badge.classList.remove('hidden');
+                badge.classList.add('flex');
+            }
+
+            renderPosts();
+            showToast(`${label} का संग्रह प्रदर्शित किया गया`, "fa-solid fa-box-archive text-orange-600");
+            const feed = document.getElementById('postsFeed');
+            if (feed) feed.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function clearArchiveFilter() {
+            selectedArchiveKey = null;
+            const badge = document.getElementById('activeArchiveBadge');
+            if (badge) {
+                badge.classList.add('hidden');
+                badge.classList.remove('flex');
+            }
+            renderPosts();
+            closeArchiveModal();
+        }
+
+        /* --- POSTS RENDERING & FEED --- */
+        function loadAllPosts() {
+            const savedDaily = localStorage.getItem('urja_daily_suvichar');
+            if (savedDaily) {
+                try { dailySuvichar = JSON.parse(savedDaily); } catch(e) {}
+            }
+            renderDailySuvichar();
+
+            const localSaved = localStorage.getItem('urja_portal_posts');
+            if (localSaved) {
+                try {
+                    postsData = JSON.parse(localSaved);
+                } catch(e) {
+                    postsData = SEED_POSTS;
+                }
+            } else {
+                postsData = SEED_POSTS;
+                savePostsLocal();
+            }
+            renderPosts();
+            updatePanchangUI();
+            checkUrlAdminHash();
+        }
+
+        function savePostsLocal() {
+            localStorage.setItem('urja_portal_posts', JSON.stringify(postsData));
+        }
+
+        function renderPosts() {
+            const feed = document.getElementById('postsFeed');
+            feed.innerHTML = "";
+
+            const q = searchQuery.toLowerCase().trim();
+            const filtered = postsData.filter(p => {
+                const matchCategory = (currentTab === 'all' || p.category === currentTab);
+                const matchSearch = !q || (p.title && p.title.toLowerCase().includes(q)) || (p.description && p.description.toLowerCase().includes(q));
+                
+                let matchArchive = true;
+                if (selectedArchiveKey) {
+                    const postDate = new Date(p.timestamp || Date.now());
+                    const y = postDate.getFullYear();
+                    const m = String(postDate.getMonth() + 1).padStart(2, '0');
+                    if (selectedArchiveKey.includes('-')) {
+                        matchArchive = (`${y}-${m}` === selectedArchiveKey);
+                    } else {
+                        matchArchive = (String(y) === selectedArchiveKey);
+                    }
+                }
+
+                return matchCategory && matchSearch && matchArchive;
+            });
+
+            if (filtered.length === 0) {
+                feed.innerHTML = `
+                    <div class="text-center py-12 bg-white rounded-3xl border border-dashed border-stone-200">
+                        <i class="fa-solid fa-magnifying-glass text-3xl text-orange-400 mb-2"></i>
+                        <p class="text-sm font-semibold text-stone-600">कोई विचार या पोस्ट नहीं मिला।</p>
+                        <p class="text-xs text-stone-400 mt-1">${searchQuery || selectedArchiveKey ? 'अन्य फ़िल्टर या माह चुनकर देखें।' : "जल्द ही नई पोस्ट्स प्रकाशित होंगी।"}</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(post => {
+                const card = document.createElement('article');
+                card.className = "bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-orange-100 flex flex-col";
+                
+                const likedHeartClass = post.userLiked ? "fa-solid text-red-500 scale-110" : "fa-regular text-stone-600";
+                const isCustomTextCard = post.cardType === 'text';
+                const themeClasses = BG_THEMES[post.bgTheme] || BG_THEMES.sunrise;
+                const fontClass = post.fontFamily || 'font-title';
+
+                card.innerHTML = `
+                    <!-- Post Header info -->
+                    <div class="px-5 py-4 flex items-center justify-between border-b border-stone-100">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-600 text-white flex items-center justify-center font-bold font-title text-lg shadow-xs">
+                                ॐ
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-stone-800 text-sm leading-snug">ऋषभ कुमार शर्मा (संपादक)</h4>
+                                <p class="text-xs text-stone-400 flex items-center gap-1">
+                                    <i class="fa-regular fa-clock"></i>
+                                    <span>${post.date || 'हाल ही में प्रकाशित'}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <span class="text-xs uppercase px-2.5 py-1 rounded-full bg-orange-50 text-orange-700 font-bold tracking-wider">
+                            ${getCategoryBadgeLabel(post.category)}
+                        </span>
+                    </div>
+
+                    <!-- Post Visual Content -->
+                    ${isCustomTextCard ? `
+                    <div class="p-8 sm:p-12 ${themeClasses} relative overflow-hidden flex flex-col items-center justify-center text-center min-h-[260px] shadow-inner">
+                        <span class="text-4xl opacity-20 font-serif absolute top-3 left-4 select-none">“</span>
+                        <div class="text-2xl sm:text-3xl font-bold tracking-wide ${fontClass} drop-shadow-md leading-relaxed relative z-10">
+                            ${post.title}
+                        </div>
+                        ${post.description ? `
+                        <p class="mt-4 text-sm sm:text-base opacity-90 max-w-xl font-hindi leading-relaxed relative z-10 whitespace-pre-line">
+                            ${post.description}
+                        </p>` : ''}
+                        <div class="mt-6 flex items-center gap-2 opacity-80 text-xs font-semibold tracking-widest uppercase">
+                            <span>— ऋषभ कुमार शर्मा</span>
+                            <span class="text-amber-300 font-banner">ॐ</span>
+                        </div>
+                        <span class="text-4xl opacity-20 font-serif absolute bottom-2 right-4 select-none">”</span>
+                    </div>
+                    ` : `
+                    ${post.imageUrl ? `
+                    <div class="relative w-full bg-stone-100 overflow-hidden group">
+                        <img src="${post.imageUrl}" alt="${post.title}" loading="lazy" class="w-full max-h-[500px] object-cover transition-transform duration-500 group-hover:scale-[1.01]" onerror="this.src='https://placehold.co/800x500/ea580c/ffffff?text=Urja'">
+                    </div>` : ''}
+
+                    <div class="p-5 flex-1">
+                        <h3 class="font-title text-xl sm:text-2xl font-bold text-stone-900 leading-snug mb-2">
+                            ${post.title}
+                        </h3>
+                        ${post.description ? `
+                        <p class="text-stone-600 text-sm sm:text-base leading-relaxed whitespace-pre-line">
+                            ${post.description}
+                        </p>` : ''}
+                    </div>
+                    `}
+
+                    <!-- Action Bar -->
+                    <div class="px-5 py-3.5 bg-orange-50/50 border-t border-orange-100/70 flex items-center justify-between text-stone-600">
+                        <div class="flex items-center gap-6">
+                            <button type="button" onclick="handleLike('${post.id}')" class="flex items-center gap-1.5 text-xs font-semibold hover:text-red-500 transition cursor-pointer">
+                                <i class="${likedHeartClass} text-base transition-transform active:scale-125"></i>
+                                <span>${post.likes || 0}</span>
+                            </button>
+
+                            <button type="button" onclick="openCommentModal('${post.id}')" class="flex items-center gap-1.5 text-xs font-semibold hover:text-orange-600 transition cursor-pointer">
+                                <i class="fa-regular fa-comment text-base"></i>
+                                <span>${post.comments ? post.comments.length : 0}</span>
+                            </button>
+                        </div>
+
+                        <button type="button" onclick="handleShare('${post.id}')" class="flex items-center gap-1.5 text-xs font-semibold hover:text-orange-600 transition px-2.5 py-1 rounded-full hover:bg-orange-100/60 cursor-pointer">
+                            <i class="fa-solid fa-share-nodes text-base text-orange-600"></i>
+                            <span>शेयर करें</span>
+                        </button>
+                    </div>
+                `;
+                feed.appendChild(card);
+            });
+        }
+
+        function getCategoryBadgeLabel(cat) {
+            switch(cat) {
+                case 'urja': return 'ऊर्जा विचार';
+                case 'news': return 'समाचार';
+                case 'cricket': return 'क्रिकेट';
+                case 'entertainment': return 'मनोरंजन';
+                case 'all': return 'समस्त';
+                default: return 'ऊर्जा';
+            }
+        }
+
+        function filterCategory(category) {
+            currentTab = category;
+            document.querySelectorAll('.cat-pill').forEach(btn => {
+                btn.className = "cat-pill px-3.5 py-1.5 rounded-full text-xs font-bold transition flex items-center gap-1.5 shrink-0 cursor-pointer bg-stone-100 text-stone-700 hover:bg-orange-50";
+            });
+            const activeBtn = document.getElementById('cat-' + category);
+            if (activeBtn) {
+                activeBtn.className = "cat-pill active px-3.5 py-1.5 rounded-full text-xs font-bold transition flex items-center gap-1.5 shrink-0 cursor-pointer bg-orange-600 text-white shadow-xs";
+            }
+            renderPosts();
+        }
+
+        function handleSearch(term) {
+            searchQuery = term;
+            const menuInput = document.getElementById('menuSearchInput');
+            if (menuInput && menuInput.value !== term) menuInput.value = term;
+            renderPosts();
+        }
+
+        function handleLike(postId) {
+            const post = postsData.find(p => p.id === postId);
+            if (!post) return;
+
+            if (post.userLiked) {
+                post.likes = Math.max(0, post.likes - 1);
+                post.userLiked = false;
+            } else {
+                post.likes = (post.likes || 0) + 1;
+                post.userLiked = true;
+                showToast("विचार पसंद आया! धन्यवाद।", "fa-solid fa-heart text-red-500");
+            }
+
+            savePostsLocal();
+            renderPosts();
+        }
+
+        function handleShare(postId) {
+            const post = postsData.find(p => p.id === postId);
+            const shareText = `"${post ? post.title : 'ऊर्जा विचार'}"\nसंपादक: ऋषभ कुमार शर्मा\nवेबसाइट पर पढ़ें: ${window.location.href}`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'ऊर्जा - सकारात्मक विचार',
+                    text: shareText,
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                const tempInput = document.createElement("textarea");
+                tempInput.value = shareText;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                showToast("शेयर लिंक क्लिपबोर्ड पर कॉपी हो गया!", "fa-solid fa-check text-green-400");
+            }
+        }
+
+        /* --- COMMENT SYSTEM --- */
+        function openCommentModal(postId) {
+            activeCommentPostId = postId;
+            const list = document.getElementById('commentList');
+            list.innerHTML = "";
+
+            let targetComments = [];
+            if (postId === 'daily-suvichar') {
+                targetComments = dailySuvichar.comments || [];
+            } else {
+                const post = postsData.find(p => p.id === postId);
+                targetComments = post && post.comments ? post.comments : [];
+            }
+
+            if (targetComments.length === 0) {
+                list.innerHTML = `<p class="text-xs text-stone-400 text-center py-6">अभी कोई टिप्पणी नहीं है। पहली प्रतिक्रिया दें!</p>`;
+            } else {
+                targetComments.forEach(c => {
+                    const item = document.createElement('div');
+                    item.className = "p-3 rounded-2xl bg-orange-50/50 border border-orange-100";
+                    item.innerHTML = `
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-xs font-bold text-stone-800">${c.name}</span>
+                        </div>
+                        <p class="text-xs text-stone-600">${c.text}</p>
+                    `;
+                    list.appendChild(item);
+                });
+            }
+
+            document.getElementById('commentModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCommentModal() {
+            document.getElementById('commentModal').style.display = 'none';
+            document.body.style.overflow = '';
+            activeCommentPostId = null;
+        }
+
+        function handleCommentSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('commentUserName').value.trim();
+            const text = document.getElementById('commentText').value.trim();
+
+            if (!name || !text || !activeCommentPostId) return;
+
+            if (activeCommentPostId === 'daily-suvichar') {
+                if (!dailySuvichar.comments) dailySuvichar.comments = [];
+                dailySuvichar.comments.push({ name, text });
+                saveDailySuvichar();
+                renderDailySuvichar();
+                openCommentModal(activeCommentPostId);
+                document.getElementById('commentText').value = "";
+                showToast("सुविचार पर प्रतिक्रिया दर्ज हुई!", "fa-solid fa-comment text-amber-500");
+                return;
+            }
+
+            const post = postsData.find(p => p.id === activeCommentPostId);
+            if (post) {
+                if (!post.comments) post.comments = [];
+                post.comments.push({ name, text });
+                savePostsLocal();
+                renderPosts();
+                openCommentModal(activeCommentPostId);
+                document.getElementById('commentText').value = "";
+                showToast("आपकी प्रतिक्रिया दर्ज हुई!", "fa-solid fa-comment-dots text-orange-400");
+            }
+        }
+
+        /* --- POST CREATOR CONTROLS (ADMIN ONLY) --- */
+        function selectPostType(type) {
+            selectedPostType = type;
+            const imgBtn = document.getElementById('typeBtnImage');
+            const txtBtn = document.getElementById('typeBtnText');
+            const imgSec = document.getElementById('imageInputSection');
+            const txtSec = document.getElementById('textStyleSection');
+
+            if (type === 'image') {
+                imgBtn.className = "py-2 px-3 rounded-xl border-2 border-orange-600 bg-orange-50 text-orange-700 text-xs font-bold flex items-center justify-center gap-1.5 transition cursor-pointer";
+                txtBtn.className = "py-2 px-3 rounded-xl border border-stone-200 bg-stone-50 text-stone-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition cursor-pointer";
+                imgSec.classList.remove('hidden');
+                txtSec.classList.add('hidden');
+            } else {
+                txtBtn.className = "py-2 px-3 rounded-xl border-2 border-orange-600 bg-orange-50 text-orange-700 text-xs font-bold flex items-center justify-center gap-1.5 transition cursor-pointer";
+                imgBtn.className = "py-2 px-3 rounded-xl border border-stone-200 bg-stone-50 text-stone-600 text-xs font-semibold flex items-center justify-center gap-1.5 transition cursor-pointer";
+                imgSec.classList.add('hidden');
+                txtSec.classList.remove('hidden');
+            }
+        }
+
+        function selectCardBg(themeKey) {
+            selectedCardBg = themeKey;
+            document.querySelectorAll('.bg-choice-btn').forEach(btn => {
+                if (btn.getAttribute('data-bg') === themeKey) {
+                    btn.classList.add('ring-2', 'ring-orange-500', 'ring-offset-1');
+                } else {
+                    btn.classList.remove('ring-2', 'ring-orange-500', 'ring-offset-1');
+                }
+            });
+        }
+
+        function previewSelectedImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    pendingImageDataUrl = e.target.result;
+                    document.getElementById('imagePreview').src = pendingImageDataUrl;
+                    document.getElementById('imagePreviewContainer').classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handlePostSubmit(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('postTitle').value.trim();
+            const category = document.getElementById('postCategory').value;
+            const description = document.getElementById('postDescription').value.trim();
+            const fontChoice = document.getElementById('cardFontChoice').value;
+            let imageUrl = document.getElementById('postImageUrl').value.trim();
+
+            if (!imageUrl && pendingImageDataUrl) {
+                imageUrl = pendingImageDataUrl;
+            }
+
+            if (!title) return;
+
+            const newPost = {
+                id: "post-" + Date.now(),
+                category: category,
+                title: title,
+                description: description,
+                cardType: selectedPostType,
+                bgTheme: selectedCardBg,
+                fontFamily: fontChoice,
+                imageUrl: selectedPostType === 'image' ? (imageUrl || "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1000&q=80") : "",
+                likes: 0,
+                userLiked: false,
+                comments: [],
+                date: new Date().toLocaleDateString('hi-IN', { month: 'long', year: 'numeric' }),
+                timestamp: Date.now()
+            };
+
+            postsData.unshift(newPost);
+            savePostsLocal();
+
+            resetAdminForm();
+            closeAdminModal();
+            filterCategory(category);
+            showToast("नया विचार सफलतापूर्वक प्रकाशित हुआ!", "fa-solid fa-circle-check text-green-400");
+        }
+
+        function resetAdminForm() {
+            document.getElementById('newPostForm').reset();
+            document.getElementById('imagePreviewContainer').classList.add('hidden');
+            document.getElementById('imagePreview').src = "";
+            pendingImageDataUrl = "";
+            selectPostType('image');
+            selectCardBg('sunrise');
+        }
+
+        function showToast(msg, iconClass) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            if (iconClass) {
+                document.getElementById('toastIcon').className = iconClass;
+            }
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        window.addEventListener('hashchange', checkUrlAdminHash);
+
+        window.onload = function() {
+            loadAllPosts();
+        };
+    </script>
+</body>
+</html>
